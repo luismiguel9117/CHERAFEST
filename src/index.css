@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #fff2f6;
+    background-image: 
+      repeating-linear-gradient(90deg, rgba(255, 183, 209, 0.25) 0 22px, transparent 22px 44px),
+      repeating-linear-gradient(0deg, rgba(255, 183, 209, 0.25) 0 22px, transparent 22px 44px);
+  }
+}
+
+/* Scallop lace border pattern */
+.lace-border-bottom {
+  height: 14px;
+  background-image: radial-gradient(circle at 9px 0, #ffffff 8px, transparent 9px);
+  background-size: 18px 14px;
+  background-repeat: repeat-x;
+}
+
+.lace-border-top {
+  height: 14px;
+  background-image: radial-gradient(circle at 9px 14px, #ffffff 8px, transparent 9px);
+  background-size: 18px 14px;
+  background-repeat: repeat-x;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fff0f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #f78ab6;
+  border-radius: 999px;
+  border: 2px solid #fff0f6;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ef7fae;
+}
+
+/* Text stroke utilities for 3D title effect */
+.text-stroke-white {
+  -webkit-text-stroke: 4px #ffffff;
+  paint-order: stroke fill;
+}
+
+.text-stroke-white-lg {
+  -webkit-text-stroke: 7px #ffffff;
+  paint-order: stroke fill;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+  50% { transform: translateY(-7px) rotate(1.5deg); }
+}
+
+.animate-floaty {
+  animation: floaty 4s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
