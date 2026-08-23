@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import WelcomeVideoModal from './components/WelcomeVideoModal';
-import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import FeatureCards from './components/FeatureCards';
 import WeeklyQuickView from './components/WeeklyQuickView';
@@ -8,7 +7,7 @@ import CalendarSection from './components/CalendarSection';
 import WishlistView from './components/WishlistView';
 import GallerySection from './components/GallerySection';
 import DayDetailModal from './components/DayDetailModal';
-import SpotifyPlayerModal from './components/SpotifyPlayerModal';
+import SpotifyFloatingPlayer from './components/SpotifyFloatingPlayer';
 import Footer from './components/Footer';
 
 import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST, POLAROID_PHOTOS } from './data/calendarData';
@@ -19,7 +18,6 @@ const STORAGE_WISH_KEY = 'charo_fest_wishlist_v1';
 
 export default function App() {
   const [showWelcomeVideo, setShowWelcomeVideo] = useState(true);
-  const [showSpotifyPlayer, setShowSpotifyPlayer] = useState(false);
   const [activeTab, setActiveTab] = useState('main'); // 'main' | 'wishlist'
   const [selectedDay, setSelectedDay] = useState(null);
 
@@ -46,7 +44,6 @@ export default function App() {
   useEffect(() => {
     async function loadSupabaseData() {
       try {
-        // Cargar Actividades de Supabase
         const { data: actsData, error: actsError } = await supabase
           .from('activities')
           .select('*')
@@ -69,7 +66,6 @@ export default function App() {
           localStorage.setItem(STORAGE_ACTS_KEY, JSON.stringify(formatted));
         }
 
-        // Cargar Wishlist de Supabase
         const { data: wishData, error: wishError } = await supabase
           .from('wishlist')
           .select('*')
@@ -103,13 +99,10 @@ export default function App() {
     if (!target) return;
 
     const nextCompleted = !target.completed;
-
-    // Actualizar estado local inmediatamente
     const updated = activities.map(act => (act.day === day ? { ...act, completed: nextCompleted } : act));
     setActivities(updated);
     localStorage.setItem(STORAGE_ACTS_KEY, JSON.stringify(updated));
 
-    // Guardar en Supabase en segundo plano
     try {
       await supabase
         .from('activities')
@@ -126,13 +119,10 @@ export default function App() {
     if (!target) return;
 
     const nextReserved = !target.reserved;
-
-    // Actualizar estado local
     const updated = wishlist.map(item => (item.id === id ? { ...item, reserved: nextReserved } : item));
     setWishlist(updated);
     localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(updated));
 
-    // Guardar en Supabase en segundo plano
     try {
       await supabase
         .from('wishlist')
@@ -149,7 +139,6 @@ export default function App() {
     setWishlist(updated);
     localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(updated));
 
-    // Guardar en Supabase en segundo plano
     try {
       await supabase
         .from('wishlist')
@@ -178,14 +167,7 @@ export default function App() {
         <WelcomeVideoModal onClose={() => setShowWelcomeVideo(false)} />
       )}
 
-      {/* 2. Navigation Bar */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        onReplayVideo={() => setShowWelcomeVideo(true)}
-      />
-
-      {/* 3. Main Views */}
+      {/* 2. Main Views (Sin Navbar externo, todo está integrado en la imagen del Hero) */}
       {activeTab === 'main' ? (
         <main className="flex-1">
           {/* Hero Banner CHARO FEST */}
@@ -194,7 +176,9 @@ export default function App() {
               document.getElementById('calendario')?.scrollIntoView({ behavior: 'smooth' });
             }}
             onOpenWishlist={() => setActiveTab('wishlist')}
-            onOpenSpotifyPlayer={() => setShowSpotifyPlayer(true)}
+            onOpenGallery={() => {
+              document.getElementById('galeria')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           />
 
           {/* Cards TU CHARO FEST & Timer */}
@@ -226,6 +210,17 @@ export default function App() {
         </main>
       ) : (
         <main className="flex-1">
+          {/* Botón Volver al Inicio cuando se está en la vista de Wishlist */}
+          <div className="p-4 bg-white/90 border-b border-[#ffd0e2] flex items-center justify-between">
+            <button
+              onClick={() => setActiveTab('main')}
+              className="font-baloo font-bold text-sm text-white bg-[#ef7fae] hover:bg-[#e0669a] px-5 py-2 rounded-full shadow-xs"
+            >
+              ← Volver al Charo Fest
+            </button>
+            <span className="font-baloo font-extrabold text-lg text-[#ef7fae]">Wishlist de Charo 🎀</span>
+          </div>
+
           {/* Vista Completa de Wishlist */}
           <WishlistView
             wishlist={wishlist}
@@ -235,7 +230,7 @@ export default function App() {
         </main>
       )}
 
-      {/* 4. Modal de Detalle de Día */}
+      {/* 3. Modal de Detalle de Día */}
       {selectedDay !== null && (
         <DayDetailModal
           dayData={currentSelectedData}
@@ -244,13 +239,10 @@ export default function App() {
         />
       )}
 
-      {/* 5. Modal de Reproductor en Tiempo Real de Spotify */}
-      <SpotifyPlayerModal
-        isOpen={showSpotifyPlayer}
-        onClose={() => setShowSpotifyPlayer(false)}
-      />
+      {/* 4. Reproductor Flotante de la Playlist de Spotify */}
+      <SpotifyFloatingPlayer />
 
-      {/* 6. Footer */}
+      {/* 5. Footer */}
       <Footer />
 
     </div>
