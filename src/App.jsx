@@ -12,6 +12,7 @@ import SpotifyPlayerModal from './components/SpotifyPlayerModal';
 import Footer from './components/Footer';
 
 import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST, POLAROID_PHOTOS } from './data/calendarData';
+import { supabase } from './lib/supabase';
 
 const STORAGE_ACTS_KEY = 'charo_fest_activities_v1';
 const STORAGE_WISH_KEY = 'charo_fest_wishlist_v1';
@@ -22,7 +23,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('main'); // 'main' | 'wishlist'
   const [selectedDay, setSelectedDay] = useState(null);
 
-  // Cargar estado guardado o usar defaults
+  // Estados de datos
   const [activities, setActivities] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_ACTS_KEY);
@@ -41,40 +42,130 @@ export default function App() {
     }
   });
 
-  // Guardar cambios en localStorage
+  // 1. Cargar datos en tiempo real desde Supabase al iniciar
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_ACTS_KEY, JSON.stringify(activities));
-    } catch (e) {
-      console.error("Error al guardar actividades:", e);
-    }
-  }, [activities]);
+    async function loadSupabaseData() {
+      try {
+        // Cargar Actividades de Supabase
+        const { data: actsData, error: actsError } = await supabase
+          .from('activities')
+          .select('*')
+          .order('day', { ascending: true });
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(wishlist));
-    } catch (e) {
-      console.error("Error al guardar wishlist:", e);
-    }
-  }, [wishlist]);
+        if (!actsError && actsData && actsData.length > 0) {
+          const formatted = actsData.map(a => ({
+            day: a.day,
+            weekday: a.weekday,
+            title: a.title,
+            time: a.time,
+            place: a.place,
+            tag: a.tag,
+            icon: a.icon,
+            note: a.note,
+            secretChallenge: a.secret_challenge,
+            completed: !!a.completed
+          }));
+          setActivities(formatted);
+          localStorage.setItem(STORAGE_ACTS_KEY, JSON.stringify(formatted));
+        }
 
-  // Toggle estado de reto completado
-  const handleToggleComplete = (day) => {
-    setActivities(prev =>
-      prev.map(act => (act.day === day ? { ...act, completed: !act.completed } : act))
-    );
+        // Cargar Wishlist de Supabase
+        const { data: wishData, error: wishError } = await supabase
+          .from('wishlist')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!wishError && wishData && wishData.length > 0) {
+          const formattedWish = wishData.map(w => ({
+            id: w.id,
+            title: w.title,
+            category: w.category,
+            price: w.price,
+            note: w.note,
+            status: w.status,
+            reserved: !!w.reserved,
+            image: w.image
+          }));
+          setWishlist(formattedWish);
+          localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(formattedWish));
+        }
+      } catch (err) {
+        console.log("Usando datos locales por desconexión:", err);
+      }
+    }
+
+    loadSupabaseData();
+  }, []);
+
+  // 2. Toggle estado de reto completado en Supabase
+  const handleToggleComplete = async (day) => {
+    const target = activities.find(a => a.day === day);
+    if (!target) return;
+
+    const nextCompleted = !target.completed;
+
+    // Actualizar estado local inmediatamente
+    const updated = activities.map(act => (act.day === day ? { ...act, completed: nextCompleted } : act));
+    setActivities(updated);
+    localStorage.setItem(STORAGE_ACTS_KEY, JSON.stringify(updated));
+
+    // Guardar en Supabase en segundo plano
+    try {
+      await supabase
+        .from('activities')
+        .update({ completed: nextCompleted })
+        .eq('day', day);
+    } catch (e) {
+      console.error("Error actualizando Supabase:", e);
+    }
   };
 
-  // Toggle reserva de la wishlist
-  const handleToggleReserve = (id) => {
-    setWishlist(prev =>
-      prev.map(item => (item.id === id ? { ...item, reserved: !item.reserved } : item))
-    );
+  // 3. Toggle reserva de la wishlist en Supabase
+  const handleToggleReserve = async (id) => {
+    const target = wishlist.find(w => w.id === id);
+    if (!target) return;
+
+    const nextReserved = !target.reserved;
+
+    // Actualizar estado local
+    const updated = wishlist.map(item => (item.id === id ? { ...item, reserved: nextReserved } : item));
+    setWishlist(updated);
+    localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(updated));
+
+    // Guardar en Supabase en segundo plano
+    try {
+      await supabase
+        .from('wishlist')
+        .update({ reserved: nextReserved, status: nextReserved ? 'Reservado' : 'Deseado' })
+        .eq('id', id);
+    } catch (e) {
+      console.error("Error actualizando Supabase wishlist:", e);
+    }
   };
 
-  // Agregar nuevo item a la wishlist
-  const handleAddWishItem = (newItem) => {
-    setWishlist(prev => [newItem, ...prev]);
+  // 4. Agregar nuevo item a la wishlist en Supabase
+  const handleAddWishItem = async (newItem) => {
+    const updated = [newItem, ...wishlist];
+    setWishlist(updated);
+    localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(updated));
+
+    // Guardar en Supabase en segundo plano
+    try {
+      await supabase
+        .from('wishlist')
+        .insert([{
+          id: newItem.id,
+          title: newItem.title,
+          category: newItem.category,
+          price: newItem.price,
+          note: newItem.note,
+          status: newItem.status || 'Deseado',
+          reserved: !!newItem.reserved,
+          image: newItem.image
+        }]);
+    } catch (e) {
+      console.error("Error insertando en Supabase wishlist:", e);
+    }
   };
 
   const currentSelectedData = activities.find(a => a.day === selectedDay);
