@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import WelcomeVideoModal from './components/WelcomeVideoModal';
+import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import FeatureCards from './components/FeatureCards';
 import WeeklyQuickView from './components/WeeklyQuickView';
@@ -167,7 +168,14 @@ export default function App() {
         <WelcomeVideoModal onClose={() => setShowWelcomeVideo(false)} />
       )}
 
-      {/* 2. Main Views (Sin Navbar externo, todo está integrado en la imagen del Hero) */}
+      {/* 2. Navigation Bar Superior con todos los botones (CALENDARIO, RETOS, EVENTOS, GALERÍA, WISHLIST, CHARO DAY, VER VIDEO) */}
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onReplayVideo={() => setShowWelcomeVideo(true)}
+      />
+
+      {/* 3. Main Views */}
       {activeTab === 'main' ? (
         <main className="flex-1">
           {/* Hero Banner CHARO FEST */}
@@ -230,7 +238,7 @@ export default function App() {
         </main>
       )}
 
-      {/* 3. Modal de Detalle de Día */}
+      {/* 4. Modal de Detalle de Día */}
       {selectedDay !== null && (
         <DayDetailModal
           dayData={currentSelectedData}
@@ -239,10 +247,10 @@ export default function App() {
         />
       )}
 
-      {/* 4. Reproductor Flotante de la Playlist de Spotify */}
+      {/* 5. Reproductor Flotante de la Playlist de Spotify */}
       <SpotifyFloatingPlayer />
 
-      {/* 5. Footer */}
+      {/* 6. Footer */}
       <Footer />
 
     </div>
