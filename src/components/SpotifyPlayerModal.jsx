@@ -4,7 +4,11 @@ import confetti from 'canvas-confetti';
 
 export default function SpotifyPlayerModal({ isOpen, onClose }) {
   const [activeMode, setActiveMode] = useState('embed'); // 'embed' | 'player'
-  const [playlistId, setPlaylistId] = useState('37i9dQZF1DXcBWIGoYBM5M'); // Default Spotify Playlist ID (Kawaii/Pink Hits)
+  // Playlist Oficial del Charo Fest de la usuaria
+  const OFFICIAL_PLAYLIST_ID = '4oBZ0xkrOD4VFfquiR51p8';
+  const OFFICIAL_PLAYLIST_URL = 'https://open.spotify.com/playlist/4oBZ0xkrOD4VFfquiR51p8?si=546c79253bc242ab';
+
+  const [playlistId, setPlaylistId] = useState(OFFICIAL_PLAYLIST_ID);
   const [customInput, setCustomInput] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIdx, setCurrentTrackIdx] = useState(0);
@@ -15,11 +19,11 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
 
   const audioRef = useRef(null);
 
-  // Playlist de Canciones Reales Kawaii / BTS / Pink para el reproductor en tiempo real
+  // Playlist de Canciones Reales para el reproductor kawaii en tiempo real
   const tracks = [
     {
       title: "Dynamite",
-      artist: "BTS",
+      artist: "BTS (Charo Fest Choice)",
       cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&auto=format&fit=crop&q=60",
       audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=kawaii-cute-sweet-chill-114402.mp3"
     },
@@ -30,8 +34,8 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
       audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b9821815.mp3?filename=sweet-kawaii-pop-10825.mp3"
     },
     {
-      title: "My Melody Theme",
-      artist: "Sanrio Magical Sound",
+      title: "My Melody Magic",
+      artist: "Sanrio Sound",
       cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&auto=format&fit=crop&q=60",
       audioUrl: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=cute-happy-background-15491.mp3"
     },
@@ -114,12 +118,10 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
-  // Cargar playlist personalizada de Spotify introducida por el usuario
   const handleUpdatePlaylist = (e) => {
     e.preventDefault();
     if (!customInput.trim()) return;
 
-    // Extraer ID de la URL si el usuario pegó el enlace completo
     let id = customInput.trim();
     const match = id.match(/playlist\/([a-zA-Z0-9]+)/);
     if (match && match[1]) {
@@ -162,7 +164,7 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
           <Heart className="w-3.5 h-3.5 fill-[#ef7fae]" />
         </div>
 
-        {/* Switcher Tabs: Spotify Official Embed vs Real-Time Audio Player */}
+        {/* Switcher Tabs */}
         <div className="flex justify-center gap-2 my-3">
           <button
             onClick={() => setActiveMode('embed')}
@@ -173,7 +175,7 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
             }`}
           >
             <Radio className="w-3.5 h-3.5" />
-            <span>Spotify Embed Real</span>
+            <span>Spotify Oficial en Vivo 🎵</span>
           </button>
 
           <button
@@ -185,47 +187,30 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
             }`}
           >
             <Music className="w-3.5 h-3.5" />
-            <span>Reproductor Kawaii 🎵</span>
+            <span>Reproductor Kawaii 🎀</span>
           </button>
         </div>
 
-        {/* MODO 1: SPOTIFY EMBED OFICIAL EN TIEMPO REAL */}
+        {/* MODO 1: SPOTIFY EMBED OFICIAL DE CHARO FEST */}
         {activeMode === 'embed' && (
           <div className="my-4 animate-fadeIn">
             <div className="rounded-2xl overflow-hidden shadow-md border-2 border-[#ffd0e2] bg-[#121212]">
               <iframe
                 src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&theme=0`}
                 width="100%"
-                height="350"
+                height="360"
                 frameBorder="0"
                 allowFullScreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
-                title="Spotify Playlist Charo Fest"
+                title="Playlist Oficial Charo Fest 2026"
                 className="w-full"
               />
             </div>
-
-            {/* Formulario para cambiar la Playlist URL de Spotify */}
-            <form onSubmit={handleUpdatePlaylist} className="mt-4 flex gap-2">
-              <input
-                type="text"
-                placeholder="Pega aquí el enlace de tu Playlist de Spotify..."
-                value={customInput}
-                onChange={(e) => setCustomInput(e.target.value)}
-                className="flex-1 border-2 border-[#ffd6e6] rounded-xl px-3 py-2 text-xs font-semibold text-[#7a4a63] bg-[#fff8fb] outline-none focus:border-[#ef7fae]"
-              />
-              <button
-                type="submit"
-                className="font-baloo font-bold text-xs bg-[#ef7fae] text-white px-4 py-2 rounded-xl hover:bg-[#e0669a] transition-colors shadow-xs"
-              >
-                Cargar
-              </button>
-            </form>
           </div>
         )}
 
-        {/* MODO 2: REPRODUCTOR DE AUDIO KAWAII EN TIEMPO REAL CON CONTROLES */}
+        {/* MODO 2: REPRODUCTOR DE AUDIO KAWAII EN TIEMPO REAL */}
         {activeMode === 'player' && (
           <div className="my-4 bg-[#fff4f9] border-2 border-[#ffd0e2] rounded-2xl p-4 animate-fadeIn">
             
@@ -251,7 +236,7 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
               </div>
             </div>
 
-            {/* Progress Bar en Tiempo Real */}
+            {/* Progress Bar */}
             <div className="my-3">
               <input
                 type="range"
@@ -290,44 +275,19 @@ export default function SpotifyPlayerModal({ isOpen, onClose }) {
                 <SkipForward className="w-5 h-5" />
               </button>
             </div>
-
-            {/* Track Selector list */}
-            <div className="mt-4 pt-3 border-t border-[#ffd6e6] space-y-1.5 max-h-32 overflow-y-auto">
-              {tracks.map((t, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setCurrentTrackIdx(idx);
-                    setIsPlaying(false);
-                    setTimeout(() => {
-                      if (audioRef.current) audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-                    }, 100);
-                  }}
-                  className={`w-full text-left px-3 py-1.5 rounded-xl font-bold text-xs flex items-center justify-between transition-colors ${
-                    idx === currentTrackIdx
-                      ? 'bg-[#ef7fae] text-white'
-                      : 'bg-white/60 text-[#7a4a63] hover:bg-white'
-                  }`}
-                >
-                  <span>{idx + 1}. {t.title} - {t.artist}</span>
-                  {idx === currentTrackIdx && isPlaying && <Sparkles className="w-3.5 h-3.5 animate-spin" />}
-                </button>
-              ))}
-            </div>
-
           </div>
         )}
 
-        {/* Link directo a Spotify Web */}
+        {/* Link directo a la Playlist Oficial de Spotify en la App */}
         <div className="mt-4">
           <a
-            href={`https://open.spotify.com/playlist/${playlistId}`}
+            href={OFFICIAL_PLAYLIST_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1DB954] hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#1DB954] hover:underline bg-[#eefbf3] border border-[#a3e5bb] px-4 py-2 rounded-full"
           >
-            <span>Abrir esta playlist directamente en la App de Spotify</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <span>💚 Abrir Playlist Oficial del Charo Fest en la App de Spotify</span>
+            <ExternalLink className="w-4 h-4" />
           </a>
         </div>
 
