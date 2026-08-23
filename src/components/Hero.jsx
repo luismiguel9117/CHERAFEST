@@ -15,52 +15,52 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* 2. Borde Superior de Encaje (borde.png) */}
+      {/* 2. Borde Superior de Encaje (borde.png con alto restaurado: h-16 sm:h-24 md:h-28) */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Superior"
-        className="absolute top-0 left-0 right-0 w-full h-14 sm:h-18 md:h-20 object-fill z-20 pointer-events-none"
+        className="absolute top-0 left-0 right-0 w-full h-16 sm:h-24 md:h-28 object-fill z-20 pointer-events-none"
       />
 
-      {/* 3. Borde Inferior de Encaje (borde.png) */}
+      {/* 3. Borde Inferior de Encaje (borde.png con alto restaurado: h-16 sm:h-24 md:h-28 y rotación 180) */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Inferior"
-        className="absolute bottom-0 left-0 right-0 w-full h-14 sm:h-18 md:h-20 object-fill z-20 pointer-events-none rotate-180"
+        className="absolute bottom-0 left-0 right-0 w-full h-16 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
       />
 
       {/* 4. Personaje My Melody Izquierda (mascot_personaje.png) */}
       <img
         src="/assets/mascot_personaje.png"
         alt="My Melody Mascot"
-        className="absolute left-[1%] bottom-[7%] h-[56vh] max-h-[500px] min-h-[280px] w-auto object-contain drop-shadow-md z-25 animate-floaty"
+        className="absolute left-[1.5%] bottom-[10%] h-[58vh] max-h-[520px] min-h-[280px] w-auto object-contain drop-shadow-md z-25 animate-floaty"
       />
 
       {/* 5. Ratita Flat con Globo (rata_mouse.png) por ENCIMA del borde inferior (z-30) */}
       <img
         src="/assets/rata_mouse.png"
         alt="Flat Mouse Balloon"
-        className="absolute left-[4%] bottom-[2.5%] h-[19vh] max-h-[175px] min-h-[95px] w-auto object-contain drop-shadow-md z-30"
+        className="absolute left-[4.5%] bottom-[3.5%] h-[20vh] max-h-[185px] min-h-[100px] w-auto object-contain drop-shadow-md z-30"
       />
 
       {/* 6. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png) */}
       <img
         src="/assets/derecha_items.png"
         alt="Elementos Derecha Charo Fest"
-        className="absolute right-[0.5%] bottom-[6%] h-[66vh] max-h-[580px] min-h-[300px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25"
+        className="absolute right-[1%] bottom-[8%] h-[68vh] max-h-[600px] min-h-[320px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25"
       />
 
-      {/* 7. Título Gráfico Central (titulo.png) Bajado a top-[13%] para dar espacio con el borde superior */}
+      {/* 7. Título Gráfico Central (titulo.png) Bajado a top-[15%] para dejar libre el borde superior */}
       <img
         src="/assets/titulo.png"
         alt="Título Charo Fest"
-        className="absolute left-1/2 -translate-x-1/2 top-[13%] sm:top-[14%] h-[38vh] max-h-[360px] min-h-[190px] w-auto object-contain z-25 drop-shadow-sm"
+        className="absolute left-1/2 -translate-x-1/2 top-[15%] sm:top-[16%] h-[38vh] max-h-[360px] min-h-[190px] w-auto object-contain z-25 drop-shadow-sm"
       />
 
-      {/* 8. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN (Ubicado a top-[53%] sin superposición con el título) */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-[53%] sm:top-[54%] md:top-[53%] w-[90%] max-w-[640px] text-center flex flex-col items-center gap-3.5 z-30 pointer-events-auto">
+      {/* 8. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN (Sin superposición, bajado adecuadamente) */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-[55%] sm:top-[56%] md:top-[55%] w-[90%] max-w-[640px] text-center flex flex-col items-center gap-3.5 z-30 pointer-events-auto">
         
-        {/* Subtítulo descriptivo de 3 líneas con espacio holgado */}
+        {/* Subtítulo descriptivo de 3 líneas */}
         <p className="font-quicksand font-bold text-xs sm:text-sm md:text-base text-[#7a3b5b] leading-relaxed max-w-xl drop-shadow-xs">
           Porque celebrar un solo día sería demasiado normal.<br className="hidden sm:inline" />
           24 días de retos misios, BTS, rosado,<br className="hidden sm:inline" />

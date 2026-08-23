@@ -8,7 +8,6 @@ import CalendarSection from './components/CalendarSection';
 import WishlistView from './components/WishlistView';
 import GallerySection from './components/GallerySection';
 import DayDetailModal from './components/DayDetailModal';
-import SpotifyFloatingPlayer from './components/SpotifyFloatingPlayer';
 import Footer from './components/Footer';
 
 import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST, POLAROID_PHOTOS } from './data/calendarData';
@@ -168,7 +167,7 @@ export default function App() {
         <WelcomeVideoModal onClose={() => setShowWelcomeVideo(false)} />
       )}
 
-      {/* 2. Navigation Bar Superior con todos los botones (CALENDARIO, RETOS, EVENTOS, GALERÍA, WISHLIST, CHARO DAY, VER VIDEO) */}
+      {/* 2. Navigation Bar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -247,10 +246,7 @@ export default function App() {
         />
       )}
 
-      {/* 5. Reproductor Flotante de la Playlist de Spotify */}
-      <SpotifyFloatingPlayer />
-
-      {/* 6. Footer */}
+      {/* 5. Footer */}
       <Footer />
 
     </div>
