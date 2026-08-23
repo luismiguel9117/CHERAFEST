@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Music, ChevronDown, ChevronUp, ExternalLink, Heart, Sparkles } from 'lucide-react';
+import { Music, ChevronDown, ChevronUp, ExternalLink, Heart } from 'lucide-react';
 
 export default function SpotifyFloatingPlayer() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -9,7 +9,7 @@ export default function SpotifyFloatingPlayer() {
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
       
-      {/* Caja del Reproductor de Spotify Flotante (cuando está expandido) */}
+      {/* Caja del Reproductor de Spotify Flotante (con reproducción automática habilitada) */}
       {isExpanded && (
         <div className="mb-2 bg-white/95 backdrop-blur-md border-3 border-[#ffd0e2] rounded-3xl p-3.5 shadow-[0_12px_32px_rgba(239,127,174,0.35)] w-80 sm:w-88 animate-popIn">
           
@@ -30,16 +30,16 @@ export default function SpotifyFloatingPlayer() {
             </button>
           </div>
 
-          {/* Embed oficial de Spotify de la Playlist de Charo Fest */}
+          {/* Embed oficial de Spotify con AUTOPLAY activado */}
           <div className="rounded-2xl overflow-hidden shadow-xs border border-[#ffd0e2] bg-[#121212]">
             <iframe
-              src={`https://open.spotify.com/embed/playlist/${PLAYLIST_ID}?utm_source=generator&theme=0`}
+              src={`https://open.spotify.com/embed/playlist/${PLAYLIST_ID}?utm_source=generator&theme=0&autoplay=1`}
               width="100%"
               height="352"
               frameBorder="0"
               allowFullScreen=""
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
+              loading="eager"
               title="Playlist Oficial Charo Fest 2026"
               className="w-full"
             />
