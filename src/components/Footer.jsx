@@ -5,10 +5,15 @@ export default function Footer() {
   const PLAYLIST_URL = 'https://open.spotify.com/playlist/4oBZ0xkrOD4VFfquiR51p8?si=546c79253bc242ab';
 
   return (
-    <footer className="w-full bg-[#fff2f6] border-t-2 border-[#ffd0e2] select-none">
+    <footer 
+      className="w-full relative select-none overflow-hidden bg-no-repeat bg-top bg-cover"
+      style={{
+        backgroundImage: `url('/assets/footer_bg.png')`
+      }}
+    >
       
       {/* BANNER SUPERIOR CON MY MELODY Y RATITA FLAT */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 relative flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-12 sm:pt-16 pb-8 relative flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
         
         {/* Mascot My Melody Izquierda (footer melody.png) */}
         <div className="flex-shrink-0 z-10">
@@ -20,7 +25,7 @@ export default function Footer() {
         </div>
 
         {/* Card Mensaje Central de Agradecimiento */}
-        <div className="bg-[#fff6f9] border-2 border-[#ffd0e2] rounded-3xl p-6 sm:p-8 text-center max-w-xl shadow-[0_8px_24px_rgba(239,127,174,0.12)] z-10 flex-1">
+        <div className="bg-white/90 backdrop-blur-xs border-2 border-[#ffd0e2] rounded-3xl p-6 sm:p-8 text-center max-w-xl shadow-[0_8px_24px_rgba(239,127,174,0.15)] z-10 flex-1">
           <h3 className="font-baloo font-extrabold text-lg sm:text-xl text-[#ef7fae] mb-2">
             Gracias por ser parte de esta magia.
           </h3>
@@ -43,11 +48,8 @@ export default function Footer() {
 
       </div>
 
-      {/* Borde de Encaje Scalloped Divider */}
-      <div className="lace-border-bottom" />
-
-      {/* PIE DE PÁGINA INFERIOR */}
-      <div className="bg-[#fff0f6] py-10">
+      {/* PIE DE PÁGINA INFERIOR SOBRE LA PARTE INFERIOR DEL FONDO */}
+      <div className="py-10 bg-white/40 backdrop-blur-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
           
           {/* Columna 1: Logo & Créditos */}
@@ -132,7 +134,7 @@ export default function Footer() {
               href={PLAYLIST_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#fff6f9] border-2 border-[#ffd0e2] hover:border-[#ef7fae] rounded-2xl p-3 flex items-center gap-3 transition-all hover:scale-102 shadow-xs group"
+              className="bg-white/90 border-2 border-[#ffd0e2] hover:border-[#ef7fae] rounded-2xl p-3 flex items-center gap-3 transition-all hover:scale-102 shadow-xs group"
             >
               <div className="w-10 h-10 rounded-full bg-[#ffe0ec] text-[#ef7fae] flex items-center justify-center flex-shrink-0 group-hover:bg-[#ef7fae] group-hover:text-white transition-colors">
                 <Radio className="w-5 h-5" />
