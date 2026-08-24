@@ -1,184 +1,202 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Gift, Clock, Sparkles, Heart, ChevronRight } from 'lucide-react';
+import { Calendar as CalendarIcon, Heart, Sparkles, Gift } from 'lucide-react';
 
 export default function FeatureCards({ onOpenCalendar, onOpenWishlist, onSelectDay }) {
-  // Timer de cuenta regresiva al próximo evento (por ejemplo, Septiembre 3)
-  const [timeLeft, setTimeLeft] = useState({
-    days: '02',
-    hours: '14',
-    minutes: '32',
-    seconds: '18'
-  });
+  // Timer de cuenta regresiva para el evento central (Sept 3, 2026 - Reto: Karaoke)
+  const [timeLeft, setTimeLeft] = useState({ days: 2, hours: 14, minutes: 32, seconds: 18 });
 
   useEffect(() => {
-    const targetDate = new Date('2026-09-03T20:30:00');
-    
+    const targetDate = new Date('2026-09-03T20:30:00').getTime();
+
     const interval = setInterval(() => {
-      const now = new Date();
-      const diff = targetDate - now;
+      const now = new Date().getTime();
+      const difference = targetDate - now;
 
-      if (diff > 0) {
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / 1000 / 60) % 60);
-        const s = Math.floor((diff / 1000) % 60);
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        setTimeLeft({
-          days: String(d).padStart(2, '0'),
-          hours: String(h).padStart(2, '0'),
-          minutes: String(m).padStart(2, '0'),
-          seconds: String(s).padStart(2, '0')
-        });
+        setTimeLeft({ days, hours, minutes, seconds });
       } else {
-        setTimeLeft({ days: '00', hours: '00', minutes: '00', seconds: '00' });
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <section className="py-10 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Título de la Sección */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 font-baloo font-bold text-[#f78ab6] text-sm tracking-widest uppercase">
-            <span>✨</span>
-            <span>TU CHARO FEST</span>
-            <span>✨</span>
-          </div>
-          <p className="text-sm sm:text-base font-semibold text-[#b3789a] mt-1">
-            Un mes para guardar recuerdos, disfrutar cada momento y hacer de septiembre algo inolvidable.
-          </p>
-        </div>
+  const formatNumber = (num) => String(num).padStart(2, '0');
 
-        {/* Grid de 4 Tarjetas */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          {/* Card 1: 24 Días de Magia */}
-          <div className="bg-white border-3 border-[#ffd0e2] rounded-3xl p-5 shadow-[0_8px_0_rgba(255,190,215,0.35)] flex flex-col justify-between items-center text-center hover:translate-y-[-4px] transition-transform">
-            <div className="w-full">
-              <div className="inline-flex items-center gap-1 font-baloo font-bold text-xs text-[#ef7fae] uppercase tracking-wider mb-2">
-                <span>🎀</span> 24 DÍAS DE MAGIA
-              </div>
-              
-              <div className="my-3 bg-[#fff0f6] border-2 border-[#ffc0d8] rounded-2xl p-4 relative">
-                <span className="font-baloo font-extrabold text-5xl text-[#f78ab6] block">24</span>
-                <span className="text-xs font-bold text-[#d4699b]">días para celebrar</span>
-              </div>
+  return (
+    <section className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-16 text-center select-none">
+      
+      {/* Título de la Sección */}
+      <div className="mb-8 sm:mb-12">
+        <h2 className="font-baloo font-black text-2xl sm:text-3xl md:text-4xl text-[#ef7fae] uppercase tracking-wide flex items-center justify-center gap-2">
+          <span>✨</span>
+          <span>TU CHARO FEST</span>
+          <span>✨</span>
+        </h2>
+        <p className="font-quicksand font-bold text-xs sm:text-sm md:text-base text-[#b3789a] mt-1 max-w-xl mx-auto">
+          Un mes para guardar recuerdos, disfrutar cada momento y hacer de septiembre algo inolvidable.
+        </p>
+      </div>
+
+      {/* Grid de 4 Cards Informativas */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        
+        {/* Card 1: 24 Días de Magia */}
+        <div className="bg-[#fff6f9] border-2 border-[#ffd0e2] rounded-3xl p-6 flex flex-col justify-between items-center shadow-[0_8px_20px_rgba(239,127,174,0.12)] hover:scale-102 transition-transform">
+          <div className="w-full">
+            <div className="inline-flex items-center gap-1.5 font-baloo font-bold text-xs text-[#e0669a] bg-[#ffe0ec] rounded-full px-3.5 py-1 mb-4">
+              <span>✨</span>
+              <span>24 DÍAS DE MAGIA</span>
+            </div>
+            
+            {/* Ilustración del calendario de mesa PNG */}
+            <div className="my-2 flex justify-center">
+              <img
+                src="/assets/calendario.png"
+                alt="24 Días de Magia"
+                className="h-28 object-contain drop-shadow-sm"
+              />
             </div>
 
-            <p className="text-xs font-semibold text-[#a05a80] mt-2 mb-4">
+            <p className="font-quicksand font-bold text-xs sm:text-sm text-[#7a4a63] mt-3">
               Retos, actividades y sorpresas todos los días.
             </p>
           </div>
-
-          {/* Card 2: Próximo Evento (Cuenta Regresiva) */}
-          <div className="bg-white border-3 border-[#ffd0e2] rounded-3xl p-5 shadow-[0_8px_0_rgba(255,190,215,0.35)] flex flex-col justify-between items-center text-center hover:translate-y-[-4px] transition-transform">
-            <div className="w-full">
-              <div className="inline-flex items-center gap-1 font-baloo font-bold text-xs text-[#ef7fae] uppercase tracking-wider mb-2">
-                <span>🎤</span> PRÓXIMO EVENTO
-              </div>
-
-              <div className="my-2 bg-[#fdf5ff] border-2 border-[#e8dcfa] rounded-2xl p-3">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <span className="text-xl">🐰🎤</span>
-                  <span className="font-baloo font-bold text-sm text-[#8a63b8]">Reto: Karaoke</span>
-                </div>
-                <div className="text-[11px] font-semibold text-[#a98fc4]">Jueves 3 de Septiembre</div>
-
-                {/* Counter units */}
-                <div className="grid grid-cols-4 gap-1 mt-3">
-                  <div className="bg-white border border-[#e2cdf6] rounded-lg p-1">
-                    <span className="font-baloo font-bold text-base text-[#ef7fae] block leading-none">{timeLeft.days}</span>
-                    <span className="text-[9px] text-[#b3789a] font-semibold">días</span>
-                  </div>
-                  <div className="bg-white border border-[#e2cdf6] rounded-lg p-1">
-                    <span className="font-baloo font-bold text-base text-[#ef7fae] block leading-none">{timeLeft.hours}</span>
-                    <span className="text-[9px] text-[#b3789a] font-semibold">hrs</span>
-                  </div>
-                  <div className="bg-white border border-[#e2cdf6] rounded-lg p-1">
-                    <span className="font-baloo font-bold text-base text-[#ef7fae] block leading-none">{timeLeft.minutes}</span>
-                    <span className="text-[9px] text-[#b3789a] font-semibold">min</span>
-                  </div>
-                  <div className="bg-white border border-[#e2cdf6] rounded-lg p-1">
-                    <span className="font-baloo font-bold text-base text-[#ef7fae] block leading-none">{timeLeft.seconds}</span>
-                    <span className="text-[9px] text-[#b3789a] font-semibold">seg</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => onSelectDay(3)}
-              className="w-full mt-3 font-baloo font-bold text-xs text-white bg-[#ef7fae] hover:bg-[#e0669a] rounded-full py-2 shadow-[0_4px_0_rgba(214,105,155,0.4)] transition-all"
-            >
-              VER DETALLES
-            </button>
-          </div>
-
-          {/* Card 3: Calendario */}
-          <div className="bg-white border-3 border-[#ffd0e2] rounded-3xl p-5 shadow-[0_8px_0_rgba(255,190,215,0.35)] flex flex-col justify-between items-center text-center hover:translate-y-[-4px] transition-transform">
-            <div className="w-full">
-              <div className="inline-flex items-center gap-1 font-baloo font-bold text-xs text-[#ef7fae] uppercase tracking-wider mb-2">
-                <span>📅</span> CALENDARIO
-              </div>
-
-              <div className="my-2 bg-[#fff0f6] border-2 border-[#ffc0d8] rounded-2xl p-4 flex flex-col items-center">
-                <div className="text-4xl my-1">📅🎀</div>
-                <span className="text-xs font-bold text-[#d4699b] mt-1">24 Retos Interactivos</span>
-              </div>
-            </div>
-
-            <p className="text-xs font-semibold text-[#a05a80] mt-2 mb-3">
-              Descubre todas las actividades de septiembre.
-            </p>
-
-            <button
-              onClick={onOpenCalendar}
-              className="w-full font-baloo font-bold text-xs text-white bg-[#ef7fae] hover:bg-[#e0669a] rounded-full py-2 shadow-[0_4px_0_rgba(214,105,155,0.4)] transition-all"
-            >
-              VER CALENDARIO
-            </button>
-          </div>
-
-          {/* Card 4: Wishlist */}
-          <div className="bg-white border-3 border-[#ffd0e2] rounded-3xl p-5 shadow-[0_8px_0_rgba(255,190,215,0.35)] flex flex-col justify-between items-center text-center hover:translate-y-[-4px] transition-transform">
-            <div className="w-full">
-              <div className="inline-flex items-center gap-1 font-baloo font-bold text-xs text-[#8a63b8] uppercase tracking-wider mb-2">
-                <span>🎁</span> WISHLIST
-              </div>
-
-              <div className="my-2 bg-[#fdf5ff] border-2 border-[#e8dcfa] rounded-2xl p-4 flex flex-col items-center">
-                <div className="text-4xl my-1">🎁💖</div>
-                <span className="text-xs font-bold text-[#8a63b8] mt-1">Lista de Deseos</span>
-              </div>
-            </div>
-
-            <p className="text-xs font-semibold text-[#a05a80] mt-2 mb-3">
-              Guarda las cosas que quieres vivir, recibir o recordar.
-            </p>
-
-            <button
-              onClick={onOpenWishlist}
-              className="w-full font-baloo font-bold text-xs text-white bg-[#bda3e8] hover:bg-[#a882dd] rounded-full py-2 shadow-[0_4px_0_rgba(150,110,205,0.4)] transition-all"
-            >
-              VER WISHLIST
-            </button>
-          </div>
-
         </div>
 
-        {/* Cinta / Quote Inferior */}
-        <div className="mt-8 bg-[#fff0f6] border-2 border-[#ffd0e2] rounded-full py-3 px-6 text-center max-w-3xl mx-auto shadow-sm flex items-center justify-center gap-2">
-          <span className="text-lg">🐰</span>
-          <p className="font-baloo font-bold text-xs sm:text-sm text-[#d4699b]">
-            Esto es más que un calendario, es nuestro espacio para crear recuerdos juntas. ♥
-          </p>
+        {/* Card 2: Próximo Evento (Cuenta Regresiva Karaoke Sept 3) */}
+        <div className="bg-[#fff6f9] border-2 border-[#ffd0e2] rounded-3xl p-6 flex flex-col justify-between items-center shadow-[0_8px_20px_rgba(239,127,174,0.12)] hover:scale-102 transition-transform relative overflow-hidden">
+          <div className="w-full">
+            <div className="inline-flex items-center gap-1.5 font-baloo font-bold text-xs text-[#e0669a] bg-[#ffe0ec] rounded-full px-3.5 py-1 mb-3">
+              <span>🎤</span>
+              <span>PRÓXIMO EVENTO</span>
+            </div>
+
+            {/* Ilustración de My Melody Cantante con Micrófono PNG */}
+            <div className="flex items-center justify-center gap-2 my-1">
+              <img
+                src="/assets/melodykaraoke.png"
+                alt="My Melody Karaoke"
+                className="h-20 object-contain drop-shadow-sm"
+              />
+              <div className="text-left">
+                <span className="font-baloo font-extrabold text-sm text-[#ef7fae] block">Reto: Karaoke</span>
+                <span className="text-[11px] font-bold text-[#b3789a] block">Jueves 3 de Septiembre</span>
+                <span className="text-[10px] font-semibold text-[#804863] block mt-0.5 max-w-[130px] leading-tight">
+                  Canta tu canción favorita y comparte tu momento.
+                </span>
+              </div>
+            </div>
+
+            {/* Contador de Tiempo */}
+            <div className="bg-white/80 border border-[#ffd0e2] rounded-2xl p-2.5 my-3 grid grid-cols-4 gap-1 text-center shadow-xs">
+              <div>
+                <span className="font-baloo font-black text-sm text-[#ef7fae] block">{formatNumber(timeLeft.days)}</span>
+                <span className="text-[9px] font-bold text-[#b3789a] uppercase">días</span>
+              </div>
+              <div>
+                <span className="font-baloo font-black text-sm text-[#ef7fae] block">{formatNumber(timeLeft.hours)}</span>
+                <span className="text-[9px] font-bold text-[#b3789a] uppercase">hrs</span>
+              </div>
+              <div>
+                <span className="font-baloo font-black text-sm text-[#ef7fae] block">{formatNumber(timeLeft.minutes)}</span>
+                <span className="text-[9px] font-bold text-[#b3789a] uppercase">min</span>
+              </div>
+              <div>
+                <span className="font-baloo font-black text-sm text-[#ef7fae] block">{formatNumber(timeLeft.seconds)}</span>
+                <span className="text-[9px] font-bold text-[#b3789a] uppercase">seg</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => onSelectDay(3)}
+            className="w-full bg-[#ef7fae] hover:bg-[#e0669a] text-white font-baloo font-extrabold text-xs py-2.5 rounded-full shadow-[0_3px_0_rgba(214,105,155,0.4)] transition-all hover:scale-102 active:scale-98"
+          >
+            VER DETALLES
+          </button>
+        </div>
+
+        {/* Card 3: Calendario */}
+        <div className="bg-[#fff6f9] border-2 border-[#ffd0e2] rounded-3xl p-6 flex flex-col justify-between items-center shadow-[0_8px_20px_rgba(239,127,174,0.12)] hover:scale-102 transition-transform">
+          <div className="w-full">
+            <div className="inline-flex items-center gap-1.5 font-baloo font-bold text-xs text-[#e0669a] bg-[#ffe0ec] rounded-full px-3.5 py-1 mb-4">
+              <span>🎀</span>
+              <span>CALENDARIO</span>
+            </div>
+
+            {/* Ilustración de Calendario Sanrio */}
+            <div className="my-2 flex justify-center">
+              <img
+                src="/assets/calendario.png"
+                alt="Calendario Septiembre"
+                className="h-28 object-contain drop-shadow-sm"
+              />
+            </div>
+
+            <p className="font-quicksand font-bold text-xs sm:text-sm text-[#7a4a63] mt-3">
+              Descubre todas las actividades de septiembre.
+            </p>
+          </div>
+
+          <button
+            onClick={onOpenCalendar}
+            className="w-full bg-[#ef7fae] hover:bg-[#e0669a] text-white font-baloo font-extrabold text-xs py-2.5 rounded-full shadow-[0_3px_0_rgba(214,105,155,0.4)] transition-all hover:scale-102 active:scale-98 mt-4"
+          >
+            VER CALENDARIO
+          </button>
+        </div>
+
+        {/* Card 4: Wishlist */}
+        <div className="bg-[#fff6f9] border-2 border-[#ffd0e2] rounded-3xl p-6 flex flex-col justify-between items-center shadow-[0_8px_20px_rgba(239,127,174,0.12)] hover:scale-102 transition-transform">
+          <div className="w-full">
+            <div className="inline-flex items-center gap-1.5 font-baloo font-bold text-xs text-[#e0669a] bg-[#ffe0ec] rounded-full px-3.5 py-1 mb-4">
+              <span>🎁</span>
+              <span>WISHLIST</span>
+            </div>
+
+            {/* Ilustración de Caja de Regalo Corazón PNG */}
+            <div className="my-2 flex justify-center">
+              <img
+                src="/assets/corazon.png"
+                alt="Caja Regalo Corazón"
+                className="h-28 object-contain drop-shadow-sm"
+              />
+            </div>
+
+            <p className="font-quicksand font-bold text-xs sm:text-sm text-[#7a4a63] mt-3">
+              Guarda las cosas que quieres vivir, recibir o recordar.
+            </p>
+          </div>
+
+          <button
+            onClick={onOpenWishlist}
+            className="w-full bg-[#ef7fae] hover:bg-[#e0669a] text-white font-baloo font-extrabold text-xs py-2.5 rounded-full shadow-[0_3px_0_rgba(214,105,155,0.4)] transition-all hover:scale-102 active:scale-98 mt-4"
+          >
+            VER WISHLIST
+          </button>
         </div>
 
       </div>
+
+      {/* Banner de Frase Rosa de My Melody */}
+      <div className="bg-[#fff0f6] border-2 border-[#ffd0e2] rounded-full px-6 py-3.5 inline-flex items-center gap-3 shadow-xs max-w-2xl mx-auto">
+        <img
+          src="/assets/header_logo.png"
+          alt="My Melody Icon"
+          className="w-7 h-7 object-contain"
+        />
+        <p className="font-quicksand font-bold text-xs sm:text-sm text-[#e0669a]">
+          Esto es más que un calendario, es nuestro espacio para crear recuerdos juntas. ♥
+        </p>
+      </div>
+
     </section>
   );
 }
