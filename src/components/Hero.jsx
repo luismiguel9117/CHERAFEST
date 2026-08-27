@@ -15,14 +15,14 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* 2. Borde Inferior de Encaje (borde.png con rotación 180) */}
+      {/* 2. Borde Inferior de Encaje (borde.png con rotación 180) - Subido sutilmente en móvil */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Inferior"
-        className="absolute bottom-[4%] sm:bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
+        className="absolute bottom-[5%] sm:bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
       />
 
-      {/* 3. Título Gráfico Central (titulo.png) - AGRANDADO EN PC (md:h-[44vh] md:max-h-[460px]) */}
+      {/* 3. Título Gráfico Central (titulo.png) */}
       <img
         src="/assets/titulo.png"
         alt="Título Charo Fest"
@@ -30,8 +30,8 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
       />
 
       {/* 4. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN:
-          - En PC/DESKTOP (>= md): Ubicado a md:top-[46%] encajando debajo del título agrandado.
-          - En MÓVILES (< md): En top-[37%] impecable sin tocar FEST. */}
+          - En MÓVILES (< md): En top-[37%] impecable sin tocar FEST.
+          - En PC/DESKTOP (>= md): En md:top-[46%] encajando debajo del título. */}
       <div className="absolute left-1/2 -translate-x-1/2 top-[37%] sm:top-[39%] md:top-[46%] w-[94%] md:w-[100%] max-w-[720px] text-center flex flex-col items-center gap-2 md:gap-3.5 z-30 pointer-events-auto px-2">
         
         {/* Subtítulo descriptivo */}
@@ -59,29 +59,29 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
       </div>
 
       {/* 5. Personaje My Melody Izquierda (mascot_personaje.png):
-          - En PC/DESKTOP (>= md): SUBIDO A md:bottom-[10%] h-[60vh] max-h-[540px]
-          - En MÓVILES (< md): Intacto en bottom-[10%] */}
+          - En MÓVILES (< md): SUBIDA A bottom-[14%] para visibilidad total en celular.
+          - En PC/DESKTOP (>= md): md:bottom-[10%] h-[60vh] max-h-[540px] */}
       <img
         src="/assets/mascot_personaje.png"
         alt="My Melody Mascot"
-        className="absolute left-[0.5%] sm:left-[1%] bottom-[10%] md:bottom-[10%] h-[25vh] md:h-[60vh] max-h-[250px] md:max-h-[540px] min-h-[130px] md:min-h-[160px] w-auto object-contain drop-shadow-md z-25 opacity-90 md:opacity-100 pointer-events-none"
+        className="absolute left-[0.5%] sm:left-[1%] bottom-[14%] md:bottom-[10%] h-[26vh] md:h-[60vh] max-h-[260px] md:max-h-[540px] min-h-[130px] md:min-h-[160px] w-auto object-contain drop-shadow-md z-25 opacity-90 md:opacity-100 pointer-events-none"
       />
 
       {/* 6. Ratita Flat con Globo (rata_mouse.png):
-          - En PC/DESKTOP (>= md): SUBIDA A md:bottom-[5%] */}
+          - En MÓVILES (< md): SUBIDA A bottom-[9%] para verse completa por encima del encaje. */}
       <img
         src="/assets/rata_mouse.png"
         alt="Flat Mouse Balloon"
-        className="absolute left-[2%] sm:left-[4%] bottom-[5%] md:bottom-[5%] h-[9vh] md:h-[19vh] max-h-[100px] md:max-h-[170px] min-h-[45px] md:min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
+        className="absolute left-[2%] sm:left-[4%] bottom-[9%] md:bottom-[5%] h-[10vh] md:h-[19vh] max-h-[110px] md:max-h-[170px] min-h-[50px] md:min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
       />
 
       {/* 7. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png):
-          - En PC/DESKTOP (>= md): SUBIDOS A md:bottom-[9%] h-[68vh] max-h-[600px]
-          - En MÓVILES (< md): Intacto en bottom-[10%] */}
+          - En MÓVILES (< md): SUBIDOS A bottom-[14%] para visibilidad total en celular.
+          - En PC/DESKTOP (>= md): md:bottom-[9%] h-[68vh] max-h-[600px] */}
       <img
         src="/assets/derecha_items.png"
         alt="Elementos Derecha Charo Fest"
-        className="absolute right-[0.5%] bottom-[10%] md:bottom-[9%] h-[26vh] md:h-[68vh] max-h-[260px] md:max-h-[600px] min-h-[130px] md:min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-90 md:opacity-100 pointer-events-none"
+        className="absolute right-[0.5%] bottom-[14%] md:bottom-[9%] h-[27vh] md:h-[68vh] max-h-[270px] md:max-h-[600px] min-h-[130px] md:min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-90 md:opacity-100 pointer-events-none"
       />
 
     </header>

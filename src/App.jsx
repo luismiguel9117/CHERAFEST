@@ -11,11 +11,52 @@ import DayDetailModal from './components/DayDetailModal';
 import MusicPlayer from './components/MusicPlayer';
 import Footer from './components/Footer';
 
-import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST, POLAROID_PHOTOS } from './data/calendarData';
+import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST } from './data/calendarData';
 import { supabase } from './lib/supabase';
 
 const STORAGE_ACTS_KEY = 'charo_fest_activities_v2';
 const STORAGE_WISH_KEY = 'charo_fest_wishlist_v3';
+const STORAGE_GALLERY_KEY = 'charo_fest_gallery_v2';
+
+const PLACEHOLDER_IMG = '/assets/derecha_items.png';
+
+const INITIAL_GALLERY = [
+  {
+    id: 'p1',
+    caption: 'My Melody & Cojín Corazón 🌸',
+    date: 'Septiembre 2026',
+    rotation: '-rotate-2',
+    url: PLACEHOLDER_IMG
+  },
+  {
+    id: 'p2',
+    caption: 'Arco de Globos Charo Fest 🎈',
+    date: 'Septiembre 2026',
+    rotation: 'rotate-1',
+    url: PLACEHOLDER_IMG
+  },
+  {
+    id: 'p3',
+    caption: 'Papelería & Stickers Sanrio 🎀',
+    date: 'Septiembre 2026',
+    rotation: '-rotate-3',
+    url: PLACEHOLDER_IMG
+  },
+  {
+    id: 'p4',
+    caption: 'Picnic Mágico My Melody 🧺',
+    date: 'Septiembre 2026',
+    rotation: 'rotate-2',
+    url: PLACEHOLDER_IMG
+  },
+  {
+    id: 'p5',
+    caption: '24 Días de Cumple y Magia ✨',
+    date: 'Septiembre 2026',
+    rotation: '-rotate-1',
+    url: PLACEHOLDER_IMG
+  }
+];
 
 export default function App() {
   const [showWelcomeVideo, setShowWelcomeVideo] = useState(true);
@@ -38,6 +79,15 @@ export default function App() {
       return saved ? JSON.parse(saved) : INITIAL_WISHLIST;
     } catch {
       return INITIAL_WISHLIST;
+    }
+  });
+
+  const [galleryPhotos, setGalleryPhotos] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_GALLERY_KEY);
+      return saved ? JSON.parse(saved) : INITIAL_GALLERY;
+    } catch {
+      return INITIAL_GALLERY;
     }
   });
 
@@ -86,6 +136,23 @@ export default function App() {
           }));
           setWishlist(formattedWish);
           localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(formattedWish));
+        }
+
+        const { data: galData, error: galError } = await supabase
+          .from('gallery')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!galError && galData && galData.length > 0) {
+          const formattedGal = galData.map(g => ({
+            id: g.id,
+            caption: g.title,
+            date: g.caption || 'Septiembre 2026',
+            rotation: g.rotation || '-rotate-1',
+            url: PLACEHOLDER_IMG
+          }));
+          setGalleryPhotos(formattedGal);
+          localStorage.setItem(STORAGE_GALLERY_KEY, JSON.stringify(formattedGal));
         }
       } catch (err) {
         console.log("Usando datos locales por desconexión:", err);
@@ -160,14 +227,33 @@ export default function App() {
     }
   };
 
+  // 5. Agregar nueva foto a la Galería en Supabase
+  const handleAddPhoto = async (newPhoto) => {
+    const updated = [newPhoto, ...galleryPhotos];
+    setGalleryPhotos(updated);
+    localStorage.setItem(STORAGE_GALLERY_KEY, JSON.stringify(updated));
+
+    try {
+      await supabase
+        .from('gallery')
+        .insert([{
+          id: newPhoto.id,
+          title: newPhoto.caption,
+          caption: newPhoto.date,
+          rotation: newPhoto.rotation,
+          image: newPhoto.url
+        }]);
+    } catch (e) {
+      console.error("Error insertando en Supabase gallery:", e);
+    }
+  };
+
   const currentSelectedData = activities.find(a => a.day === selectedDay);
 
   return (
     <div className="min-h-screen flex flex-col font-quicksand bg-[#fff2f6] text-[#7a4a63] relative">
       
-      {/* BORDE DE ENCAJE SUPERIOR GLOBAL (Borde.png):
-          - MÓVIL (< md): Mayor altura h-20 para presencia impecable.
-          - PC/DESKTOP (>= md): Altura original intacta md:h-24. */}
+      {/* BORDE DE ENCAJE SUPERIOR GLOBAL (Borde.png) */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Superior"
@@ -224,8 +310,11 @@ export default function App() {
             onSelectDay={(day) => setSelectedDay(day)}
           />
 
-          {/* Galería de Recuerdos Polaroid */}
-          <GallerySection polaroids={POLAROID_PHOTOS} />
+          {/* Galería de Recuerdos Polaroid (5 Placeholders Oficiales + Subida de Fotos) */}
+          <GallerySection
+            galleryPhotos={galleryPhotos}
+            onAddPhoto={handleAddPhoto}
+          />
         </main>
       ) : (
         <main className="flex-1 pt-24 sm:pt-28">
