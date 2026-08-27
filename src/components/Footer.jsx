@@ -20,7 +20,7 @@ export default function Footer() {
         {/* CONTENIDO CENTRADO Y DESPLAZADO HACIA ABAJO (pt-16 md:pt-24) PARA NO TOCAR LA CENEFA SUPERIOR DE LAZOS */}
         <div className="max-w-6xl w-full mx-auto px-4 sm:px-8 pt-16 sm:pt-20 md:pt-24 pb-8 relative flex flex-col md:flex-row items-center justify-between gap-6 z-10">
           
-          {/* Mascot My Melody Izquierda (footer melody.png) - BAJADO Y CENTRADO */}
+          {/* Mascot My Melody Izquierda (footer melody.png) */}
           <div className="flex-shrink-0">
             <img
               src="/assets/footer melody.png"
@@ -29,7 +29,7 @@ export default function Footer() {
             />
           </div>
 
-          {/* Card Mensaje Central de Agradecimiento - BAJADO SUTILMENTE SIN TOCAR LOS LAZOS */}
+          {/* Card Mensaje Central de Agradecimiento */}
           <div className="bg-white/95 backdrop-blur-md border-3 border-[#ffd0e2] rounded-3xl p-6 sm:p-8 text-center max-w-md sm:max-w-lg shadow-[0_8px_24px_rgba(239,127,174,0.25)]">
             <h3 className="font-baloo font-extrabold text-lg sm:text-xl md:text-2xl text-[#ef7fae] mb-2">
               Gracias por ser parte de esta magia.
@@ -42,7 +42,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Mascot Ratita Flat Derecha (rata.png) - BAJADO Y CENTRADO */}
+          {/* Mascot Ratita Flat Derecha (rata.png) */}
           <div className="flex-shrink-0">
             <img
               src="/assets/rata.png"
@@ -58,12 +58,12 @@ export default function Footer() {
       <div className="py-8 bg-[#ffe4ee] border-t border-[#ffd0e2] relative z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 items-start text-left">
           
-          {/* Columna 1: Logo & Créditos */}
+          {/* Columna 1: Logo & Créditos - AGRANDADO EN FOOTER (h-12 sm:h-16) */}
           <div className="lg:col-span-4 flex flex-col items-start gap-2">
             <img
               src="/assets/header_logo.png"
               alt="My Melody Logo"
-              className="h-9 object-contain drop-shadow-xs"
+              className="h-12 sm:h-16 w-auto object-contain drop-shadow-xs"
             />
             <p className="font-baloo font-bold text-xs text-[#e0669a] flex items-center gap-1">
               <span>Hecho con</span>

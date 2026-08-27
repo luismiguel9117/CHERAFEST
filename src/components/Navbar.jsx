@@ -18,9 +18,9 @@ export default function Navbar({ activeTab, setActiveTab, onReplayVideo }) {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent px-4 sm:px-8 pt-3 sm:pt-5 pb-2 flex items-center justify-between gap-4 pointer-events-auto select-none">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent px-4 sm:px-8 pt-3 sm:pt-4 pb-2 flex items-center justify-between gap-4 pointer-events-auto select-none">
         
-        {/* Brand Logo Header */}
+        {/* Brand Logo Header - AGRANDADO EN HEADER (h-14 sm:h-16 md:h-18) */}
         <button
           onClick={() => handleNavClick('main')}
           className="flex items-center gap-2 group hover:scale-105 transition-transform cursor-pointer"
@@ -28,7 +28,7 @@ export default function Navbar({ activeTab, setActiveTab, onReplayVideo }) {
           <img
             src="/assets/header_logo.png"
             alt="My Melody Logo"
-            className="h-10 sm:h-12 w-auto object-contain drop-shadow-md"
+            className="h-14 sm:h-16 md:h-18 w-auto object-contain drop-shadow-md"
           />
         </button>
 
