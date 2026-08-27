@@ -1,37 +1,71 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Sparkles, Heart } from 'lucide-react';
+import { Volume2, VolumeX, Sparkles, Heart, Play } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function WelcomeVideoModal({ onClose }) {
   const videoRef = useRef(null);
   // Por defecto el sonido SIEMPRE está activado (isMuted = false)
   const [isMuted, setIsMuted] = useState(false);
+  const [needsUserInteraction, setNeedsUserInteraction] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.play().catch(err => {
-        console.log("Autoplay con audio requiere interacción o se silenció preventivamente:", err);
-        // Si el navegador bloquea el audio sin interacción previa, reproducir silenciado pero listo para activar
-        videoRef.current.muted = true;
-        setIsMuted(true);
-        videoRef.current.play().catch(() => {});
-      });
-    }
+    const playWithAudio = async () => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        videoRef.current.volume = 1.0;
+        try {
+          await videoRef.current.play();
+          setIsMuted(false);
+          setNeedsUserInteraction(false);
+        } catch (err) {
+          console.log("El navegador requiere interacción del usuario para reproducir audio:", err);
+          setNeedsUserInteraction(true);
+          // Intentar reproducir mientras espera interacción del usuario
+          videoRef.current.muted = false;
+          videoRef.current.play().catch(() => {});
+        }
+      }
+    };
+
+    playWithAudio();
+
+    // Listener global para activar audio al primer toque/clic en cualquier lugar de la pantalla
+    const handleGlobalClick = () => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        videoRef.current.volume = 1.0;
+        videoRef.current.play().then(() => {
+          setIsMuted(false);
+          setNeedsUserInteraction(false);
+        }).catch(() => {});
+      }
+    };
+
+    window.addEventListener('click', handleGlobalClick, { once: true });
+    window.addEventListener('touchstart', handleGlobalClick, { once: true });
+
+    return () => {
+      window.removeEventListener('click', handleGlobalClick);
+      window.removeEventListener('touchstart', handleGlobalClick);
+    };
   }, []);
 
-  const toggleSound = () => {
+  const toggleSound = (e) => {
+    e.stopPropagation();
     if (videoRef.current) {
       const nextMuted = !isMuted;
       videoRef.current.muted = nextMuted;
       setIsMuted(nextMuted);
       if (!nextMuted) {
+        videoRef.current.volume = 1.0;
         videoRef.current.play().catch(() => {});
       }
+      setNeedsUserInteraction(false);
     }
   };
 
-  const handleEnter = () => {
+  const handleEnter = (e) => {
+    if (e) e.stopPropagation();
     // Lanzar efecto de confeti rosa y corazones
     confetti({
       particleCount: 80,
@@ -44,16 +78,26 @@ export default function WelcomeVideoModal({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[200] bg-[#2b1520] flex flex-col items-center justify-center animate-fadeIn overflow-hidden">
-      {/* Video de Fondo */}
+    <div 
+      onClick={() => {
+        if (videoRef.current) {
+          videoRef.current.muted = false;
+          videoRef.current.volume = 1.0;
+          videoRef.current.play().catch(() => {});
+          setIsMuted(false);
+          setNeedsUserInteraction(false);
+        }
+      }}
+      className="fixed inset-0 z-[200] bg-[#2b1520] flex flex-col items-center justify-center animate-fadeIn overflow-hidden cursor-pointer"
+    >
+      {/* Video de Fondo con SONIDO ACTIVADO POR DEFECTO */}
       <video
         ref={videoRef}
         src="/welcome-video.mp4"
         autoPlay
-        muted={isMuted}
         playsInline
         onEnded={handleEnter}
-        className="w-full h-full object-contain md:object-cover opacity-90"
+        className="w-full h-full object-contain md:object-cover opacity-95"
       />
 
       {/* Glow ambiental rosa alrededor */}
@@ -69,6 +113,19 @@ export default function WelcomeVideoModal({ onClose }) {
           <Sparkles className="w-5 h-5 text-[#bda3e8] animate-spin hidden sm:inline-block" />
         </div>
       </div>
+
+      {/* Botón Central destacado en caso de que el navegador requiera interacción para sonar */}
+      {needsUserInteraction && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs z-20">
+          <button
+            onClick={toggleSound}
+            className="bg-[#ef7fae] hover:bg-[#e0669a] text-white font-baloo font-black text-lg md:text-2xl px-8 py-4 rounded-full shadow-[0_8px_0_rgba(180,60,115,0.5)] border-3 border-white animate-pulse flex items-center gap-3 cursor-pointer"
+          >
+            <Play className="w-8 h-8 fill-white" />
+            <span>ACTIVAR SONIDO DEL VIDEO 🔊</span>
+          </button>
+        </div>
+      )}
 
       {/* Botones de acción inferiores */}
       <div className="absolute bottom-8 sm:bottom-10 left-0 right-0 flex flex-col sm:flex-row justify-center items-center gap-3.5 sm:gap-4 px-6 z-10">
