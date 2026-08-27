@@ -108,30 +108,30 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem,
           </button>
         </div>
 
-        {/* Grid de Regalos */}
+        {/* Grid de Regalos Adaptable */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map((item) => (
             <div
               key={item.id}
               className="bg-white border-3 border-[#eadcfa] rounded-3xl p-4 shadow-[0_8px_0_rgba(200,175,240,0.32)] relative flex flex-col justify-between hover:translate-y-[-4px] transition-all group"
             >
-              {/* Imagen del Regalo */}
-              <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#fdf5ff] border border-[#f0e6fc]">
+              {/* Imagen del Regalo Adaptable en Marcos Cuadrados de Alta Calidad */}
+              <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#fff6f9] border border-[#f0e6fc] flex items-center justify-center p-3">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="max-w-full max-h-full w-auto h-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                 />
 
                 {/* Status Badge Over Image */}
                 {item.reserved && (
-                  <div className="absolute top-3 right-3 bg-[#ef7fae] text-white font-baloo font-bold text-xs tracking-wider px-3.5 py-1 rounded-full shadow-md uppercase border border-white flex items-center gap-1">
+                  <div className="absolute top-3 right-3 bg-[#ef7fae] text-white font-baloo font-bold text-xs tracking-wider px-3.5 py-1 rounded-full shadow-md uppercase border border-white flex items-center gap-1 z-10">
                     <Heart className="w-3 h-3 fill-white" />
                     <span>Reservado</span>
                   </div>
                 )}
 
-                <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm text-[#8a63b8] font-bold text-[11px] px-3 py-0.5 rounded-full border border-[#eadcfa]">
+                <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-[#8a63b8] font-bold text-[11px] px-3 py-0.5 rounded-full border border-[#eadcfa] shadow-xs z-10">
                   {item.category} • {item.price}
                 </div>
 
@@ -140,7 +140,7 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem,
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute top-3 left-3 bg-white/90 hover:bg-white text-[#ef7fae] font-baloo font-extrabold text-[11px] px-3 py-1 rounded-full border border-[#ffd0e2] shadow-xs flex items-center gap-1 transition-transform hover:scale-105"
+                    className="absolute top-3 left-3 bg-white/95 hover:bg-white text-[#ef7fae] font-baloo font-extrabold text-[11px] px-3 py-1 rounded-full border border-[#ffd0e2] shadow-xs flex items-center gap-1 transition-transform hover:scale-105 z-10"
                   >
                     <span>Ver en Tienda</span>
                     <ExternalLink className="w-3 h-3" />
@@ -149,7 +149,7 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem,
               </div>
 
               {/* Title & Notes */}
-              <div className="my-3">
+              <div className="my-3 text-left">
                 <h3 className="font-baloo font-bold text-lg sm:text-xl text-[#8a63b8] leading-tight">
                   {item.title}
                 </h3>

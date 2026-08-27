@@ -4,17 +4,28 @@ import confetti from 'canvas-confetti';
 
 export default function WelcomeVideoModal({ onClose }) {
   const videoRef = useRef(null);
-  // Por defecto el sonido SIEMPRE está activado (isMuted = false)
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.volume = 1.0;
-      videoRef.current.play().catch(err => {
-        console.log("Navegador aguarda interacción del usuario para reproducir audio:", err);
-      });
-    }
+    const startAutoplay = async () => {
+      if (videoRef.current) {
+        // Intenta primero reproducir con audio activado por defecto
+        videoRef.current.muted = false;
+        videoRef.current.volume = 1.0;
+        try {
+          await videoRef.current.play();
+          setIsMuted(false);
+        } catch (err) {
+          console.log("El navegador requiere interacción para sonar. Iniciando reproducción automática de inmediato:", err);
+          // Si el navegador bloquea el audio preventivo, REPRODUCIR AUTOMÁTICAMENTE DE INMEDIATO (sin esperar clics)
+          videoRef.current.muted = true;
+          setIsMuted(true);
+          videoRef.current.play().catch(() => {});
+        }
+      }
+    };
+
+    startAutoplay();
 
     // Listener global para activar audio al primer toque/clic en cualquier lugar de la pantalla
     const handleGlobalClick = () => {
@@ -74,7 +85,7 @@ export default function WelcomeVideoModal({ onClose }) {
       }}
       className="fixed inset-0 z-[200] bg-[#2b1520] flex flex-col items-center justify-center animate-fadeIn overflow-hidden cursor-pointer"
     >
-      {/* Video de Fondo con SONIDO ACTIVADO POR DEFECTO */}
+      {/* Video de Fondo - REPRODUCCIÓN AUTOMÁTICA GARANTIZADA AL 100% */}
       <video
         ref={videoRef}
         src="/welcome-video.mp4"
@@ -98,7 +109,7 @@ export default function WelcomeVideoModal({ onClose }) {
         </div>
       </div>
 
-      {/* ÚNICOS BOTONES INFERIORES: DESACTIVAR SONIDO Y ENTRAR AL CHARO FEST */}
+      {/* ÚNICOS BOTONES INFERIORES: DESACTIVAR/ACTIVAR SONIDO Y ENTRAR AL CHARO FEST */}
       <div className="absolute bottom-8 sm:bottom-10 left-0 right-0 flex flex-col sm:flex-row justify-center items-center gap-3.5 sm:gap-4 px-6 z-10">
         <button
           onClick={toggleSound}

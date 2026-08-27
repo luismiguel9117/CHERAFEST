@@ -13,8 +13,8 @@ import Footer from './components/Footer';
 import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST, POLAROID_PHOTOS } from './data/calendarData';
 import { supabase } from './lib/supabase';
 
-const STORAGE_ACTS_KEY = 'charo_fest_activities_v1';
-const STORAGE_WISH_KEY = 'charo_fest_wishlist_v1';
+const STORAGE_ACTS_KEY = 'charo_fest_activities_v2';
+const STORAGE_WISH_KEY = 'charo_fest_wishlist_v3';
 
 export default function App() {
   const [showWelcomeVideo, setShowWelcomeVideo] = useState(true);
@@ -83,6 +83,7 @@ export default function App() {
             image: w.image,
             link: w.link
           }));
+          setActivities(prev => prev); // trigger re-render if needed
           setWishlist(formattedWish);
           localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(formattedWish));
         }
@@ -168,7 +169,7 @@ export default function App() {
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Superior"
-        className="fixed top-0 left-0 right-0 w-full h-14 sm:h-20 md:h-24 object-fill z-40 pointer-events-none"
+        className="fixed top-0 left-0 right-0 w-full h-12 sm:h-20 md:h-24 object-fill z-40 pointer-events-none"
       />
 
       {/* 1. Modal de Video de Bienvenida */}
@@ -226,7 +227,7 @@ export default function App() {
         </main>
       ) : (
         <main className="flex-1 pt-20 sm:pt-24">
-          {/* Vista Completa de Wishlist sin la franja blanca superior */}
+          {/* Vista Completa de Wishlist */}
           <WishlistView
             wishlist={wishlist}
             onToggleReserve={handleToggleReserve}
