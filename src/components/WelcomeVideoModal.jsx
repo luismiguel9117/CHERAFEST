@@ -4,27 +4,30 @@ import confetti from 'canvas-confetti';
 
 export default function WelcomeVideoModal({ onClose }) {
   const videoRef = useRef(null);
-  // EL AUDIO SIEMPRE DEBE ESTAR ACTIVADO POR DEFECTO (isMuted = false)
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    const playWithAudio = () => {
+    const startAutoplay = async () => {
       if (videoRef.current) {
+        // 1. Intentar reproducir con audio activado por defecto
         videoRef.current.muted = false;
         videoRef.current.volume = 1.0;
-        videoRef.current.play().then(() => {
+        try {
+          await videoRef.current.play();
           setIsMuted(false);
-        }).catch(err => {
-          console.log("Esperando movimiento/clic para iniciar audio completo:", err);
-          // Forzar intento constante de audio activado
-          videoRef.current.muted = false;
-        });
+        } catch (err) {
+          console.log("El navegador requiere interacción para desmutear. Iniciando video automático e instalando listener de desmuteo:", err);
+          // 2. Si el navegador bloquea audio preventivo, reproducir de inmediato el video de forma automática y desmutear al primer gesto
+          videoRef.current.muted = true;
+          setIsMuted(true);
+          videoRef.current.play().catch(() => {});
+        }
       }
     };
 
-    playWithAudio();
+    startAutoplay();
 
-    // Listener ultra agresivo: CUALQUIER movimiento de ratón, toque, scroll o tecla activa el sonido de inmediato
+    // Listener de desmuteo instantáneo al menor movimiento, toque o clic
     const unlockAudio = () => {
       if (videoRef.current) {
         videoRef.current.muted = false;
@@ -90,7 +93,7 @@ export default function WelcomeVideoModal({ onClose }) {
       }}
       className="fixed inset-0 z-[200] bg-[#2b1520] flex flex-col items-center justify-center animate-fadeIn overflow-hidden cursor-pointer"
     >
-      {/* Video de Fondo - SONIDO ACTIVADO POR DEFECTO OBLIGATORIAMENTE */}
+      {/* Video de Fondo - REPRODUCCIÓN AUTOMÁTICA GARANTIZADA 100% AL ENTRAR A LA WEB */}
       <video
         ref={videoRef}
         src="/welcome-video.mp4"
@@ -114,7 +117,7 @@ export default function WelcomeVideoModal({ onClose }) {
         </div>
       </div>
 
-      {/* ÚNICOS BOTONES INFERIORES: DESACTIVAR SONIDO Y ENTRAR AL CHARO FEST */}
+      {/* ÚNICOS BOTONES INFERIORES: DESACTIVAR/ACTIVAR SONIDO Y ENTRAR AL CHARO FEST */}
       <div className="absolute bottom-8 sm:bottom-10 left-0 right-0 flex flex-col sm:flex-row justify-center items-center gap-3.5 sm:gap-4 px-6 z-10">
         <button
           onClick={toggleSound}
