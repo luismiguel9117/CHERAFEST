@@ -8,6 +8,7 @@ import CalendarSection from './components/CalendarSection';
 import WishlistView from './components/WishlistView';
 import GallerySection from './components/GallerySection';
 import DayDetailModal from './components/DayDetailModal';
+import MusicPlayer from './components/MusicPlayer';
 import Footer from './components/Footer';
 
 import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST, POLAROID_PHOTOS } from './data/calendarData';
@@ -83,7 +84,6 @@ export default function App() {
             image: w.image,
             link: w.link
           }));
-          setActivities(prev => prev); // trigger re-render if needed
           setWishlist(formattedWish);
           localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(formattedWish));
         }
@@ -249,7 +249,10 @@ export default function App() {
         />
       )}
 
-      {/* 5. Footer */}
+      {/* 5. Reproductor Musical Flotante en Loop con Spotify Link */}
+      <MusicPlayer />
+
+      {/* 6. Footer */}
       <Footer />
 
     </div>
