@@ -19,23 +19,23 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Inferior"
-        className="absolute bottom-[6%] sm:bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
+        className="absolute bottom-[4%] sm:bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
       />
 
-      {/* 3. Título Gráfico Central (titulo.png) - SUBIDO MÁS ARRIBA EN PC (md:top-[2%]) */}
+      {/* 3. Título Gráfico Central (titulo.png) - MÁS GRANDE EN MÓVIL (h-[30vh] max-h-[340px]) */}
       <img
         src="/assets/titulo.png"
         alt="Título Charo Fest"
-        className="absolute left-1/2 -translate-x-1/2 top-[4%] sm:top-[7%] md:top-[2%] h-[26vh] sm:h-[40vh] md:h-[44vh] max-h-[440px] min-h-[150px] w-auto object-contain z-25 drop-shadow-sm"
+        className="absolute left-1/2 -translate-x-1/2 top-[5%] sm:top-[6%] md:top-[3%] h-[30vh] sm:h-[38vh] md:h-[38vh] max-h-[360px] md:max-h-[380px] min-h-[170px] w-auto object-contain z-25 drop-shadow-sm"
       />
 
       {/* 4. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN:
-          - En PC/DESKTOP (>= md): SUBIDO MÁS ARRIBA A md:top-[32%]
-          - En MÓVILES (< md): Intacto como estaba */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-[27%] sm:top-[36%] md:top-[32%] w-[94%] md:w-[100%] max-w-[720px] text-center flex flex-col items-center gap-2 md:gap-4 z-30 pointer-events-auto px-2">
+          - En MÓVILES (< md): Bajado a top-[37%] justo debajo del título FEST agrandado sin superposición.
+          - En PC/DESKTOP (>= md): En md:top-[44%] perfecto sin tocar FEST. */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-[37%] sm:top-[39%] md:top-[44%] w-[94%] md:w-[100%] max-w-[720px] text-center flex flex-col items-center gap-2 md:gap-3.5 z-30 pointer-events-auto px-2">
         
         {/* Subtítulo descriptivo */}
-        <p className="font-quicksand font-bold text-xs sm:text-base md:text-lg lg:text-xl text-[#7a3b5b] leading-tight md:leading-relaxed max-w-2xl drop-shadow-xs">
+        <p className="font-quicksand font-bold text-xs sm:text-base md:text-lg text-[#7a3b5b] leading-tight md:leading-relaxed max-w-2xl drop-shadow-xs">
           Porque celebrar un solo día sería demasiado normal.<br className="hidden sm:inline" />
           24 días de retos misios, BTS, rosado,<br className="hidden sm:inline" />
           ramen, karaoke y recuerdos inolvidables.
@@ -59,28 +59,26 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
       </div>
 
       {/* 5. Personaje My Melody Izquierda (mascot_personaje.png):
-          - En PC/DESKTOP (>= md): SUBIDA A md:bottom-[12%]
-          - En MÓVILES (< md): Intacto */}
+          - En MÓVILES (< md): bottom-[10%] apoyada limpiamente sin cortes.
+          - En PC/DESKTOP (>= md): md:bottom-[7%] h-[54vh] max-h-[480px] */}
       <img
         src="/assets/mascot_personaje.png"
         alt="My Melody Mascot"
-        className="absolute left-[0.5%] sm:left-[1%] bottom-[14%] md:bottom-[12%] h-[26vh] md:h-[58vh] max-h-[260px] md:max-h-[520px] min-h-[130px] md:min-h-[160px] w-auto object-contain drop-shadow-md z-25 opacity-90 md:opacity-100 pointer-events-none"
+        className="absolute left-[0.5%] sm:left-[1%] bottom-[10%] md:bottom-[7%] h-[25vh] md:h-[54vh] max-h-[250px] md:max-h-[480px] min-h-[130px] md:min-h-[160px] w-auto object-contain drop-shadow-md z-25 opacity-90 md:opacity-100 pointer-events-none"
       />
 
-      {/* 6. Ratita Flat con Globo (rata_mouse.png):
-          - En PC/DESKTOP (>= md): SUBIDA A md:bottom-[6%] */}
+      {/* 6. Ratita Flat con Globo (rata_mouse.png) */}
       <img
         src="/assets/rata_mouse.png"
         alt="Flat Mouse Balloon"
-        className="absolute left-[2%] sm:left-[4%] bottom-[9%] md:bottom-[6%] h-[10vh] md:h-[19vh] max-h-[110px] md:max-h-[180px] min-h-[50px] md:min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
+        className="absolute left-[2%] sm:left-[4%] bottom-[5%] md:bottom-[3%] h-[9vh] md:h-[18vh] max-h-[100px] md:max-h-[160px] min-h-[45px] md:min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
       />
 
-      {/* 7. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png):
-          - En PC/DESKTOP (>= md): SUBIDOS A md:bottom-[11%] */}
+      {/* 7. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png) */}
       <img
         src="/assets/derecha_items.png"
         alt="Elementos Derecha Charo Fest"
-        className="absolute right-[0.5%] bottom-[14%] md:bottom-[11%] h-[27vh] md:h-[68vh] max-h-[270px] md:max-h-[600px] min-h-[130px] md:min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-90 md:opacity-100 pointer-events-none"
+        className="absolute right-[0.5%] bottom-[10%] md:bottom-[6%] h-[26vh] md:h-[62vh] max-h-[260px] md:max-h-[540px] min-h-[130px] md:min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-90 md:opacity-100 pointer-events-none"
       />
 
     </header>
