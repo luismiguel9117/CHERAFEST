@@ -165,11 +165,13 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col font-quicksand bg-[#fff2f6] text-[#7a4a63] relative">
       
-      {/* BORDE DE ENCAJE SUPERIOR GLOBAL (Borde.png) PERMANENTE EN TODAS LAS PÁGINAS */}
+      {/* BORDE DE ENCAJE SUPERIOR GLOBAL (Borde.png):
+          - MÓVIL (< md): Mayor altura h-20 para presencia impecable.
+          - PC/DESKTOP (>= md): Altura original intacta md:h-24. */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Superior"
-        className="fixed top-0 left-0 right-0 w-full h-12 sm:h-20 md:h-24 object-fill z-40 pointer-events-none"
+        className="fixed top-0 left-0 right-0 w-full h-20 sm:h-24 md:h-24 object-fill z-40 pointer-events-none"
       />
 
       {/* 1. Modal de Video de Bienvenida */}
@@ -226,7 +228,7 @@ export default function App() {
           <GallerySection polaroids={POLAROID_PHOTOS} />
         </main>
       ) : (
-        <main className="flex-1 pt-20 sm:pt-24">
+        <main className="flex-1 pt-24 sm:pt-28">
           {/* Vista Completa de Wishlist */}
           <WishlistView
             wishlist={wishlist}
@@ -249,7 +251,7 @@ export default function App() {
         />
       )}
 
-      {/* 5. Reproductor Musical Flotante en Loop con canciones MP3 locales (Se inicia automático al salir del vídeo) */}
+      {/* 5. Reproductor Musical Flotante en Loop en el lado derecho */}
       <MusicPlayer shouldAutoPlay={!showWelcomeVideo} />
 
       {/* 6. Footer */}
