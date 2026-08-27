@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Calendar as CalendarIcon, Heart, Sparkles, Gift } from 'lucide-react';
 
 export default function FeatureCards({ onOpenCalendar, onOpenWishlist, onSelectDay }) {
-  // Timer de cuenta regresiva para el evento central (Sept 3, 2026 - Reto: Karaoke)
+  // Timer de cuenta regresiva para el evento central (Sept 3, 2026 - My Melody Takeover)
   const [timeLeft, setTimeLeft] = useState({ days: 2, hours: 14, minutes: 32, seconds: 18 });
 
   useEffect(() => {
-    const targetDate = new Date('2026-09-03T20:30:00').getTime();
+    const targetDate = new Date('2026-09-03T00:00:00').getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -70,26 +70,26 @@ export default function FeatureCards({ onOpenCalendar, onOpenWishlist, onSelectD
           </div>
         </div>
 
-        {/* Card 2: Próximo Evento (Cuenta Regresiva Karaoke Sept 3) */}
+        {/* Card 2: Próximo Evento (Cuenta Regresiva My Melody Takeover Sept 3) */}
         <div className="bg-[#fff6f9] border-2 border-[#ffd0e2] rounded-3xl p-6 flex flex-col justify-between items-center shadow-[0_8px_20px_rgba(239,127,174,0.12)] hover:scale-102 transition-transform relative overflow-hidden">
           <div className="w-full">
             <div className="inline-flex items-center gap-1.5 font-baloo font-bold text-xs text-[#e0669a] bg-[#ffe0ec] rounded-full px-3.5 py-1 mb-3">
-              <span>🎤</span>
+              <span>📱</span>
               <span>PRÓXIMO EVENTO</span>
             </div>
 
-            {/* Ilustración de My Melody Cantante con Micrófono PNG */}
+            {/* Ilustración de My Melody Mascot PNG */}
             <div className="flex items-center justify-center gap-2 my-1">
               <img
                 src="/assets/melodykaraoke.png"
-                alt="My Melody Karaoke"
+                alt="My Melody Takeover"
                 className="h-20 object-contain drop-shadow-sm"
               />
               <div className="text-left">
-                <span className="font-baloo font-extrabold text-sm text-[#ef7fae] block">Reto: Karaoke</span>
+                <span className="font-baloo font-extrabold text-sm text-[#ef7fae] block">My Melody Takeover</span>
                 <span className="text-[11px] font-bold text-[#b3789a] block">Jueves 3 de Septiembre</span>
                 <span className="text-[10px] font-semibold text-[#804863] block mt-0.5 max-w-[130px] leading-tight">
-                  Canta tu canción favorita y comparte tu momento.
+                  Cambiar foto de WSP o IG por My Melody.
                 </span>
               </div>
             </div>
