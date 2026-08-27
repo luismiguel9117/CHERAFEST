@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Gift, Heart, Plus, Sparkles, Check, Tag, Filter, Lock, Unlock, ExternalLink } from 'lucide-react';
+import { Gift, Heart, Plus, Sparkles, Check, Tag, Filter, Lock, Unlock, ExternalLink, ArrowLeft } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem }) {
+export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem, onBackToMain }) {
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [showAddModal, setShowAddModal] = useState(false);
   const [newItem, setNewItem] = useState({
@@ -45,9 +45,22 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
   };
 
   return (
-    <div className="py-8 sm:py-12 px-4 sm:px-6 min-h-[80vh] select-none">
+    <div className="py-6 sm:py-10 px-4 sm:px-6 min-h-[80vh] select-none">
       <div className="max-w-6xl mx-auto">
         
+        {/* Top Back Navigation Button */}
+        {onBackToMain && (
+          <div className="mb-6 flex justify-start">
+            <button
+              onClick={onBackToMain}
+              className="font-baloo font-bold text-xs sm:text-sm text-white bg-[#ef7fae] hover:bg-[#e0669a] px-5 py-2 rounded-full shadow-[0_3px_0_rgba(214,105,155,0.4)] flex items-center gap-2 transition-all hover:scale-105 cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Volver al Charo Fest</span>
+            </button>
+          </div>
+        )}
+
         {/* Title Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-[#bda3e8] text-white font-baloo font-bold text-xs sm:text-sm tracking-[0.2em] uppercase px-5 py-1.5 rounded-full shadow-[0_4px_0_rgba(150,110,205,0.4)] mb-3">

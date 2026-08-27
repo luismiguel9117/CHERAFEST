@@ -226,22 +226,15 @@ export default function App() {
         </main>
       ) : (
         <main className="flex-1 pt-20 sm:pt-24">
-          {/* Botón Volver al Inicio cuando se está en la vista de Wishlist */}
-          <div className="p-4 bg-white/90 border-b border-[#ffd0e2] flex items-center justify-between">
-            <button
-              onClick={() => setActiveTab('main')}
-              className="font-baloo font-bold text-sm text-white bg-[#ef7fae] hover:bg-[#e0669a] px-5 py-2 rounded-full shadow-xs cursor-pointer"
-            >
-              ← Volver al Charo Fest
-            </button>
-            <span className="font-baloo font-extrabold text-lg text-[#ef7fae]">Wishlist de Charo 🎀</span>
-          </div>
-
-          {/* Vista Completa de Wishlist */}
+          {/* Vista Completa de Wishlist sin la franja blanca superior */}
           <WishlistView
             wishlist={wishlist}
             onToggleReserve={handleToggleReserve}
             onAddWishItem={handleAddWishItem}
+            onBackToMain={() => {
+              setActiveTab('main');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           />
         </main>
       )}
