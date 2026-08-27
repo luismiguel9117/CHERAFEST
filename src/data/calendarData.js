@@ -291,7 +291,7 @@ export const SEPTEMBER_ACTIVITIES = [
   }
 ];
 
-// WISHLIST OFICIAL ÚNICA CON FOTOS REALES SUBIDAS POR CHARO
+// WISHLIST OFICIAL ÚNICA CON LAS 7 FOTOS REALES SUBIDAS POR CHARO (SIN DUPLICADOS)
 export const INITIAL_WISHLIST = [
   {
     id: "w1",
@@ -369,28 +369,6 @@ export const INITIAL_WISHLIST = [
     reserved: false,
     image: "/assets/biblia_ntv_rosa.jpg",
     link: "https://vidalibros.com.pe/products/biblia-ntv-valor-premium-letra-grande-con-filament-simil-piel-rosa?variant=51672820515136"
-  },
-  {
-    id: "w8",
-    title: "Aros Argollas Doradas Elegantes",
-    category: "Accesorios",
-    price: "$$",
-    note: "Isadora Perú - Argollas metálicas doradas clásicas elegantes.",
-    status: "Deseado",
-    reserved: false,
-    image: "/assets/aretes_isadora.webp",
-    link: "https://pe.isadoraonline.com/aros-argollas-51565002.html"
-  },
-  {
-    id: "w9",
-    title: "Aros Argollas Corazones Dorados",
-    category: "Accesorios",
-    price: "$$",
-    note: "Isadora Perú - Argollas metálicas con diseño de corazones dorados.",
-    status: "Deseado",
-    reserved: false,
-    image: "/assets/aretes_isadora.webp",
-    link: "https://pe.isadoraonline.com/aros-argollas-corazones-52103101.html"
   }
 ];
 
