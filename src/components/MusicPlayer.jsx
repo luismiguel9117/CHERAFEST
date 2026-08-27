@@ -107,7 +107,7 @@ export default function MusicPlayer({ shouldAutoPlay = false }) {
   };
 
   return (
-    <div className="fixed bottom-4 left-4 z-[100] select-none font-quicksand">
+    <div className="fixed bottom-4 right-4 z-[100] select-none font-quicksand">
       
       {/* Elemento de Audio HTML5 Reproduciendo las canciones exactas MP3 */}
       <audio
@@ -238,7 +238,7 @@ export default function MusicPlayer({ shouldAutoPlay = false }) {
 
         </div>
       ) : (
-        /* BOTÓN FLOTANTE MINIMIZADO (PILL DE MÚSICA DE CHARO) */
+        /* BOTÓN FLOTANTE MINIMIZADO (PILL DE MÚSICA DE CHARO EN EL LADO DERECHO) */
         <div 
           onClick={() => setIsExpanded(true)}
           className="bg-white/95 backdrop-blur-md border-2 border-[#ffc0d8] rounded-full p-2 pr-4 shadow-[0_6px_18px_rgba(239,127,174,0.35)] flex items-center gap-2.5 hover:scale-105 transition-all cursor-pointer"
