@@ -1,33 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Sparkles, Heart, Play } from 'lucide-react';
+import { Volume2, VolumeX, Sparkles, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function WelcomeVideoModal({ onClose }) {
   const videoRef = useRef(null);
   // Por defecto el sonido SIEMPRE está activado (isMuted = false)
   const [isMuted, setIsMuted] = useState(false);
-  const [needsUserInteraction, setNeedsUserInteraction] = useState(false);
 
   useEffect(() => {
-    const playWithAudio = async () => {
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-        videoRef.current.volume = 1.0;
-        try {
-          await videoRef.current.play();
-          setIsMuted(false);
-          setNeedsUserInteraction(false);
-        } catch (err) {
-          console.log("El navegador requiere interacción del usuario para reproducir audio:", err);
-          setNeedsUserInteraction(true);
-          // Intentar reproducir mientras espera interacción del usuario
-          videoRef.current.muted = false;
-          videoRef.current.play().catch(() => {});
-        }
-      }
-    };
-
-    playWithAudio();
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      videoRef.current.volume = 1.0;
+      videoRef.current.play().catch(err => {
+        console.log("Navegador aguarda interacción del usuario para reproducir audio:", err);
+      });
+    }
 
     // Listener global para activar audio al primer toque/clic en cualquier lugar de la pantalla
     const handleGlobalClick = () => {
@@ -36,7 +23,6 @@ export default function WelcomeVideoModal({ onClose }) {
         videoRef.current.volume = 1.0;
         videoRef.current.play().then(() => {
           setIsMuted(false);
-          setNeedsUserInteraction(false);
         }).catch(() => {});
       }
     };
@@ -60,7 +46,6 @@ export default function WelcomeVideoModal({ onClose }) {
         videoRef.current.volume = 1.0;
         videoRef.current.play().catch(() => {});
       }
-      setNeedsUserInteraction(false);
     }
   };
 
@@ -85,7 +70,6 @@ export default function WelcomeVideoModal({ onClose }) {
           videoRef.current.volume = 1.0;
           videoRef.current.play().catch(() => {});
           setIsMuted(false);
-          setNeedsUserInteraction(false);
         }
       }}
       className="fixed inset-0 z-[200] bg-[#2b1520] flex flex-col items-center justify-center animate-fadeIn overflow-hidden cursor-pointer"
@@ -114,20 +98,7 @@ export default function WelcomeVideoModal({ onClose }) {
         </div>
       </div>
 
-      {/* Botón Central destacado en caso de que el navegador requiera interacción para sonar */}
-      {needsUserInteraction && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs z-20">
-          <button
-            onClick={toggleSound}
-            className="bg-[#ef7fae] hover:bg-[#e0669a] text-white font-baloo font-black text-lg md:text-2xl px-8 py-4 rounded-full shadow-[0_8px_0_rgba(180,60,115,0.5)] border-3 border-white animate-pulse flex items-center gap-3 cursor-pointer"
-          >
-            <Play className="w-8 h-8 fill-white" />
-            <span>ACTIVAR SONIDO DEL VIDEO 🔊</span>
-          </button>
-        </div>
-      )}
-
-      {/* Botones de acción inferiores */}
+      {/* ÚNICOS BOTONES INFERIORES: DESACTIVAR SONIDO Y ENTRAR AL CHARO FEST */}
       <div className="absolute bottom-8 sm:bottom-10 left-0 right-0 flex flex-col sm:flex-row justify-center items-center gap-3.5 sm:gap-4 px-6 z-10">
         <button
           onClick={toggleSound}
