@@ -249,8 +249,8 @@ export default function App() {
         />
       )}
 
-      {/* 5. Reproductor Musical Flotante en Loop con Spotify Link */}
-      <MusicPlayer />
+      {/* 5. Reproductor Musical Flotante en Loop con canciones MP3 locales (Se inicia automático al salir del vídeo) */}
+      <MusicPlayer shouldAutoPlay={!showWelcomeVideo} />
 
       {/* 6. Footer */}
       <Footer />

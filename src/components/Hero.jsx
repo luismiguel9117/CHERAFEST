@@ -15,11 +15,11 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* 2. Borde Inferior de Encaje (borde.png con rotación 180) exactamente al borde inferior bottom-0 */}
+      {/* 2. Borde Inferior de Encaje (borde.png con rotación 180) - Subido en móvil para evitar corte con barra del navegador */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Inferior"
-        className="absolute bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
+        className="absolute bottom-[2%] sm:bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
       />
 
       {/* 3. Título Gráfico Central (titulo.png) */}
@@ -30,9 +30,9 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
       />
 
       {/* 4. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN:
-          - En MÓVILES (< md): Ubicado a top-[31%] ajustado justo debajo de CHARO FEST sin tapar el texto.
+          - En MÓVILES (< md): Ubicado a top-[30%] ajustado justo debajo de CHARO FEST sin tapar el texto.
           - En PC/DESKTOP (>= md): En su posición original exacta top-[54%] max-w-[720px] */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-[31%] sm:top-[38%] md:top-[54%] w-[94%] md:w-[100%] max-w-[720px] text-center flex flex-col items-center gap-2 md:gap-4 z-30 pointer-events-auto px-2">
+      <div className="absolute left-1/2 -translate-x-1/2 top-[30%] sm:top-[38%] md:top-[54%] w-[94%] md:w-[100%] max-w-[720px] text-center flex flex-col items-center gap-2 md:gap-4 z-30 pointer-events-auto px-2">
         
         {/* Subtítulo descriptivo */}
         <p className="font-quicksand font-bold text-xs sm:text-base md:text-lg lg:text-xl text-[#7a3b5b] leading-tight md:leading-relaxed max-w-2xl drop-shadow-xs">
@@ -59,28 +59,29 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
       </div>
 
       {/* 5. Personaje My Melody Izquierda (mascot_personaje.png):
-          - En MÓVILES (< md): bottom-[4%] apoyada en el borde de encaje inferior.
+          - En MÓVILES (< md): Subida a bottom-[9%] para verse 100% completa en la pantalla de celular.
           - En PC/DESKTOP (>= md): Versión original bottom-[8%] h-[58vh] max-h-[520px] */}
       <img
         src="/assets/mascot_personaje.png"
         alt="My Melody Mascot"
-        className="absolute left-[0.5%] sm:left-[1%] bottom-[4%] md:bottom-[8%] h-[28vh] md:h-[58vh] max-h-[280px] md:max-h-[520px] min-h-[130px] md:min-h-[160px] w-auto object-contain drop-shadow-md z-25 opacity-90 md:opacity-100 pointer-events-none"
+        className="absolute left-[0.5%] sm:left-[1%] bottom-[9%] md:bottom-[8%] h-[26vh] md:h-[58vh] max-h-[260px] md:max-h-[520px] min-h-[130px] md:min-h-[160px] w-auto object-contain drop-shadow-md z-25 opacity-90 md:opacity-100 pointer-events-none"
       />
 
-      {/* 6. Ratita Flat con Globo (rata_mouse.png) */}
+      {/* 6. Ratita Flat con Globo (rata_mouse.png):
+          - En MÓVILES (< md): Subida a bottom-[6%] para no quedar tapada por la cenefa inferior ni por la barra de navegación del celular. */}
       <img
         src="/assets/rata_mouse.png"
         alt="Flat Mouse Balloon"
-        className="absolute left-[2%] sm:left-[4%] bottom-[1.5%] sm:bottom-[3%] md:bottom-[3%] h-[10vh] md:h-[19vh] max-h-[110px] md:max-h-[180px] min-h-[50px] md:min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
+        className="absolute left-[2%] sm:left-[4%] bottom-[6%] md:bottom-[3%] h-[10vh] md:h-[19vh] max-h-[110px] md:max-h-[180px] min-h-[50px] md:min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
       />
 
       {/* 7. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png):
-          - En MÓVILES (< md): bottom-[4%] apoyados sobre el encaje inferior.
+          - En MÓVILES (< md): Subidos a bottom-[9%] para visibilidad total en móviles.
           - En PC/DESKTOP (>= md): Versión original bottom-[7%] h-[68vh] max-h-[600px] */}
       <img
         src="/assets/derecha_items.png"
         alt="Elementos Derecha Charo Fest"
-        className="absolute right-[0.5%] bottom-[4%] md:bottom-[7%] h-[29vh] md:h-[68vh] max-h-[290px] md:max-h-[600px] min-h-[130px] md:min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-90 md:opacity-100 pointer-events-none"
+        className="absolute right-[0.5%] bottom-[9%] md:bottom-[7%] h-[27vh] md:h-[68vh] max-h-[270px] md:max-h-[600px] min-h-[130px] md:min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-90 md:opacity-100 pointer-events-none"
       />
 
     </header>
