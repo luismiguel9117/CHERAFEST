@@ -7,14 +7,14 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
   const [showAddModal, setShowAddModal] = useState(false);
   const [newItem, setNewItem] = useState({
     title: '',
-    category: 'Físicos',
+    category: 'Sanrio',
     price: '$$',
     note: '',
     image: '',
     link: ''
   });
 
-  const categories = ['Todas', 'Físicos', 'Experiencias', 'Antojos'];
+  const categories = ['Todas', 'Sanrio', 'Accesorios', 'Tecnología', 'Físicos', 'Especiales'];
 
   const filteredItems = selectedCategory === 'Todas'
     ? wishlist
@@ -40,7 +40,7 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
       colors: ['#bda3e8', '#ef7fae', '#ffd0e2']
     });
 
-    setNewItem({ title: '', category: 'Físicos', price: '$$', note: '', image: '', link: '' });
+    setNewItem({ title: '', category: 'Sanrio', price: '$$', note: '', image: '', link: '' });
     setShowAddModal(false);
   };
 
@@ -52,7 +52,7 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-[#bda3e8] text-white font-baloo font-bold text-xs sm:text-sm tracking-[0.2em] uppercase px-5 py-1.5 rounded-full shadow-[0_4px_0_rgba(150,110,205,0.4)] mb-3">
             <Gift className="w-4 h-4" />
-            <span>WISH LIST DE CHARO</span>
+            <span>WISH LIST OFICIAL DE CHARO</span>
             <Gift className="w-4 h-4" />
           </div>
 
@@ -60,7 +60,7 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
             Ideas & Regalos
           </h2>
           <p className="text-xs sm:text-base font-bold text-[#b3789a] mt-2">
-            Cosas que le harían muy feliz a Charo en su mes especial ♥
+            La lista seleccionada con todo lo que Charo quiere en su mes especial ♥
           </p>
         </div>
 
@@ -129,7 +129,7 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
                     rel="noopener noreferrer"
                     className="absolute top-3 left-3 bg-white/90 hover:bg-white text-[#ef7fae] font-baloo font-extrabold text-[11px] px-3 py-1 rounded-full border border-[#ffd0e2] shadow-xs flex items-center gap-1 transition-transform hover:scale-105"
                   >
-                    <span>Ver Tienda</span>
+                    <span>Ver en Tienda</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 )}
@@ -202,9 +202,11 @@ export default function WishlistView({ wishlist, onToggleReserve, onAddWishItem 
                       onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
                       className="w-full border-2 border-[#f0e6fc] rounded-xl p-2.5 text-sm focus:outline-none focus:border-[#bda3e8] bg-[#fdf9ff]"
                     >
+                      <option value="Sanrio">Sanrio</option>
+                      <option value="Accesorios">Accesorios</option>
+                      <option value="Tecnología">Tecnología</option>
                       <option value="Físicos">Físicos</option>
-                      <option value="Experiencias">Experiencias</option>
-                      <option value="Antojos">Antojos</option>
+                      <option value="Especiales">Especiales</option>
                     </select>
                   </div>
 

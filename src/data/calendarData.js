@@ -291,66 +291,106 @@ export const SEPTEMBER_ACTIVITIES = [
   }
 ];
 
+// WISHLIST OFICIAL ÚNICA CON LOS 9 REGALOS SELECCIONADOS POR CHARO
 export const INITIAL_WISHLIST = [
   {
     id: "w1",
-    title: "Peluche Gigante de My Melody",
-    category: "Físicos",
+    title: "Set de Aros de Metal Corazón",
+    category: "Accesorios",
     price: "$$",
-    note: "Edición suave Sanrio, rosa con lazo de encaje pastel.",
+    note: "Isadora Perú - Set de aros metálicos dorados con dijes de corazón.",
     status: "Deseado",
     reserved: false,
-    image: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=500&auto=format&fit=crop&q=60"
+    image: "/assets/aretes_isadora.webp",
+    link: "https://pe.isadoraonline.com/aros-set-metal-52115501.html"
   },
   {
     id: "w2",
-    title: "Buzo Oversize Rosa / Lila",
-    category: "Físicos",
+    title: "Mouse Inalámbrico Macaron Rosa N62",
+    category: "Tecnología",
     price: "$$",
-    note: "Talle M, algodón supersuave para días fríos.",
-    status: "Reservado",
-    reserved: true,
-    image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&auto=format&fit=crop&q=60"
+    note: "Miniso Perú - Mouse inalámbrico rosa pastel modelo N62 Macaron.",
+    status: "Deseado",
+    reserved: false,
+    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&auto=format&fit=crop&q=60",
+    link: "https://www.miniso.pe/mouse-inalambrico-macaron-mod-n62-rosa-miniso/p"
   },
   {
     id: "w3",
-    title: "Set Completo Skincare Coreano",
-    category: "Físicos",
-    price: "$$$",
-    note: "Sérum iluminador, mascarillas de frambuesa y bálsamo labial.",
+    title: "Cosmetiquera My Melody Prism Rosa",
+    category: "Sanrio",
+    price: "$$",
+    note: "Miniso Perú - Neceser / Cosmetiquera rosa brillante My Melody Prism Sanrio.",
     status: "Deseado",
     reserved: false,
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&auto=format&fit=crop&q=60"
+    image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&auto=format&fit=crop&q=60",
+    link: "https://www.miniso.pe/cosmetiquera-my-melody-prism-sanrio-rosa-sanrio/p"
   },
   {
     id: "w4",
-    title: "Tarde de Spa & Masajes Rosados",
-    category: "Experiencias",
-    price: "$$$",
-    note: "Día completo de relajación con aromaterapia de lavanda.",
+    title: "Colgante Luminoso My Melody Luna",
+    category: "Sanrio",
+    price: "$$",
+    note: "Miniso Perú - Colgante con luz My Melody sobre la luna Sanrio.",
     status: "Deseado",
     reserved: false,
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&auto=format&fit=crop&q=60"
+    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500&auto=format&fit=crop&q=60",
+    link: "https://www.miniso.pe/colgante-luminoso-my-melody-luna-sanrio/p"
   },
   {
     id: "w5",
-    title: "Torta Personalizada de My Melody",
-    category: "Antojos",
+    title: "Kit de Cubiertos Chopper One Piece",
+    category: "Físicos",
     price: "$$",
-    note: "Relleno de manjar blanco, fresas frescas y crema pastelera.",
-    status: "Conseguido",
-    reserved: true,
-    image: "https://images.unsplash.com/photo-1535141192574-5d4897c13136?w=500&auto=format&fit=crop&q=60"
+    note: "Miniso Perú - Set de 2 cubiertos de acero inoxidable Chopper One Piece.",
+    status: "Deseado",
+    reserved: false,
+    image: "https://images.unsplash.com/photo-1615865417236-d67568728367?w=500&auto=format&fit=crop&q=60",
+    link: "https://www.miniso.pe/kit-de-cubiertos-acero-inoxidable-2-piezas-chopper-one-piece-one-piece/p"
   },
   {
     id: "w6",
-    title: "Cámara Instantánea Polaroid Rosa",
+    title: "Bolso de Compras One Piece Wanted",
     category: "Físicos",
-    price: "$$$",
-    note: "Para capturar todos los momentos del Charo Fest en fotos físicas.",
+    price: "$$",
+    note: "Miniso Perú - Tote bag / bolso de compras coleccionable One Piece Poster Se Busca.",
     status: "Deseado",
     reserved: false,
-    image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&auto=format&fit=crop&q=60"
+    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&auto=format&fit=crop&q=60",
+    link: "https://www.miniso.pe/bolso-de-compras-coleccion-one-piece-multiprint-poster-se-busca-one-piece/p"
+  },
+  {
+    id: "w7",
+    title: "Biblia NTV Símil Piel Rosa Bebé",
+    category: "Especiales",
+    price: "$$$",
+    note: "Vida Libros - Biblia versión NTV letra grande en símil piel rosa bebé (Valor Premium).",
+    status: "Deseado",
+    reserved: false,
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500&auto=format&fit=crop&q=60",
+    link: "https://vidalibros.com.pe/products/biblia-ntv-valor-premium-letra-grande-con-filament-simil-piel-rosa?variant=51672820515136"
+  },
+  {
+    id: "w8",
+    title: "Aros Argollas Doradas Elegantes",
+    category: "Accesorios",
+    price: "$$",
+    note: "Isadora Perú - Argollas metálicas doradas clásicas elegantes.",
+    status: "Deseado",
+    reserved: false,
+    image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=500&auto=format&fit=crop&q=60",
+    link: "https://pe.isadoraonline.com/aros-argollas-51565002.html"
+  },
+  {
+    id: "w9",
+    title: "Aros Argollas Corazones Dorados",
+    category: "Accesorios",
+    price: "$$",
+    note: "Isadora Perú - Argollas metálicas con diseño de corazones dorados.",
+    status: "Deseado",
+    reserved: false,
+    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&auto=format&fit=crop&q=60",
+    link: "https://pe.isadoraonline.com/aros-argollas-corazones-52103101.html"
   }
 ];
 
