@@ -28,24 +28,17 @@ export default function Navbar({ activeTab, setActiveTab, onReplayVideo }) {
           <img
             src="/assets/header_logo.png"
             alt="My Melody Logo"
-            className="h-8 sm:h-11 object-contain drop-shadow-md"
+            className="h-10 sm:h-12 w-auto object-contain drop-shadow-md"
           />
         </button>
 
-        {/* DESKTOP NAVIGATION LINKS (visibles en pantallas medianas y grandes >= md) */}
-        <div className="hidden md:flex items-center gap-3 lg:gap-4 font-baloo font-bold text-xs sm:text-sm text-[#e0669a] uppercase tracking-wider">
+        {/* DESKTOP NAVIGATION BAR (visible únicamente en pantallas >= md) */}
+        <div className="hidden md:flex items-center gap-2 lg:gap-3 font-baloo font-bold text-xs sm:text-sm text-[#e0669a]">
           <button
             onClick={() => handleNavClick('main', 'calendario')}
             className="hover:text-[#b7407a] transition-colors py-1.5 px-3 rounded-full bg-white/85 backdrop-blur-xs shadow-xs hover:bg-white cursor-pointer"
           >
             CALENDARIO
-          </button>
-
-          <button
-            onClick={() => handleNavClick('main', 'calendario')}
-            className="hover:text-[#b7407a] transition-colors py-1.5 px-3 rounded-full bg-white/85 backdrop-blur-xs shadow-xs hover:bg-white cursor-pointer"
-          >
-            RETOS
           </button>
 
           <button
@@ -163,7 +156,7 @@ export default function Navbar({ activeTab, setActiveTab, onReplayVideo }) {
                 setMobileMenuOpen(false);
                 onReplayVideo();
               }}
-              className="font-baloo font-bold text-sm text-[#ef7fae] bg-white border-2 border-[#ffd0e2] hover:bg-[#fff0f6] py-2 px-4 rounded-full flex items-center justify-center gap-2 mt-2"
+              className="font-baloo font-bold text-sm text-[#ef7fae] bg-[#fff0f6] hover:bg-[#ffe3ee] py-2 px-4 rounded-full flex items-center justify-center gap-2 shadow-xs mt-1"
             >
               <Film className="w-4 h-4 text-[#ef7fae]" />
               <span>VER VIDEO DE BIENVENIDA 🎬</span>

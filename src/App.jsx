@@ -16,7 +16,7 @@ import { supabase } from './lib/supabase';
 
 const STORAGE_ACTS_KEY = 'charo_fest_activities_v2';
 const STORAGE_WISH_KEY = 'charo_fest_wishlist_v3';
-const STORAGE_GALLERY_KEY = 'charo_fest_gallery_v2';
+const STORAGE_GALLERY_KEY = 'charo_fest_gallery_v3';
 
 const PLACEHOLDER_IMG = '/assets/derecha_items.png';
 
@@ -141,7 +141,7 @@ export default function App() {
         const { data: galData, error: galError } = await supabase
           .from('gallery')
           .select('*')
-          .order('created_at', { ascending: false });
+          .order('created_at', { ascending: true });
 
         if (!galError && galData && galData.length > 0) {
           const formattedGal = galData.map(g => ({
@@ -229,7 +229,7 @@ export default function App() {
 
   // 5. Agregar nueva foto a la Galería en Supabase
   const handleAddPhoto = async (newPhoto) => {
-    const updated = [newPhoto, ...galleryPhotos];
+    const updated = [...galleryPhotos, newPhoto];
     setGalleryPhotos(updated);
     localStorage.setItem(STORAGE_GALLERY_KEY, JSON.stringify(updated));
 
@@ -310,7 +310,7 @@ export default function App() {
             onSelectDay={(day) => setSelectedDay(day)}
           />
 
-          {/* Galería de Recuerdos Polaroid (5 Placeholders Oficiales + Subida de Fotos) */}
+          {/* Galería de Recuerdos Polaroid (Exactamente 5 Muestras) */}
           <GallerySection
             galleryPhotos={galleryPhotos}
             onAddPhoto={handleAddPhoto}
