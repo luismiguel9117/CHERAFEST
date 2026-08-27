@@ -80,7 +80,8 @@ export default function App() {
             note: w.note,
             status: w.status,
             reserved: !!w.reserved,
-            image: w.image
+            image: w.image,
+            link: w.link
           }));
           setWishlist(formattedWish);
           localStorage.setItem(STORAGE_WISH_KEY, JSON.stringify(formattedWish));
@@ -150,7 +151,8 @@ export default function App() {
           note: newItem.note,
           status: newItem.status || 'Deseado',
           reserved: !!newItem.reserved,
-          image: newItem.image
+          image: newItem.image,
+          link: newItem.link
         }]);
     } catch (e) {
       console.error("Error insertando en Supabase wishlist:", e);
@@ -160,8 +162,15 @@ export default function App() {
   const currentSelectedData = activities.find(a => a.day === selectedDay);
 
   return (
-    <div className="min-h-screen flex flex-col font-quicksand bg-[#fff2f6] text-[#7a4a63]">
+    <div className="min-h-screen flex flex-col font-quicksand bg-[#fff2f6] text-[#7a4a63] relative">
       
+      {/* BORDE DE ENCAJE SUPERIOR GLOBAL (Borde.png) PERMANENTE EN TODAS LAS PÁGINAS */}
+      <img
+        src="/assets/borde.png"
+        alt="Borde Encaje Superior"
+        className="fixed top-0 left-0 right-0 w-full h-14 sm:h-20 md:h-24 object-fill z-40 pointer-events-none"
+      />
+
       {/* 1. Modal de Video de Bienvenida */}
       {showWelcomeVideo && (
         <WelcomeVideoModal onClose={() => setShowWelcomeVideo(false)} />
@@ -176,7 +185,7 @@ export default function App() {
 
       {/* 3. Main Views */}
       {activeTab === 'main' ? (
-        <main className="flex-1">
+        <main className="flex-1 pt-12 sm:pt-14">
           {/* Hero Banner CHARO FEST */}
           <Hero
             onOpenCalendar={() => {
@@ -216,12 +225,12 @@ export default function App() {
           <GallerySection polaroids={POLAROID_PHOTOS} />
         </main>
       ) : (
-        <main className="flex-1">
+        <main className="flex-1 pt-20 sm:pt-24">
           {/* Botón Volver al Inicio cuando se está en la vista de Wishlist */}
           <div className="p-4 bg-white/90 border-b border-[#ffd0e2] flex items-center justify-between">
             <button
               onClick={() => setActiveTab('main')}
-              className="font-baloo font-bold text-sm text-white bg-[#ef7fae] hover:bg-[#e0669a] px-5 py-2 rounded-full shadow-xs"
+              className="font-baloo font-bold text-sm text-white bg-[#ef7fae] hover:bg-[#e0669a] px-5 py-2 rounded-full shadow-xs cursor-pointer"
             >
               ← Volver al Charo Fest
             </button>

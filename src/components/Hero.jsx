@@ -15,49 +15,42 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* 2. Borde Superior de Encaje (borde.png) */}
-      <img
-        src="/assets/borde.png"
-        alt="Borde Encaje Superior"
-        className="absolute top-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none"
-      />
-
-      {/* 3. Borde Inferior de Encaje (borde.png con rotación 180) */}
+      {/* 2. Borde Inferior de Encaje (borde.png con rotación 180) */}
       <img
         src="/assets/borde.png"
         alt="Borde Encaje Inferior"
         className="absolute bottom-0 left-0 right-0 w-full h-12 sm:h-24 md:h-28 object-fill z-20 pointer-events-none rotate-180"
       />
 
-      {/* 4. Personaje My Melody Izquierda (mascot_personaje.png) - Adaptable en móviles */}
+      {/* 3. Personaje My Melody Izquierda (mascot_personaje.png) - Adaptable en móviles */}
       <img
         src="/assets/mascot_personaje.png"
         alt="My Melody Mascot"
         className="absolute left-[0.5%] sm:left-[1%] bottom-[6%] sm:bottom-[8%] h-[38vh] sm:h-[58vh] max-h-[520px] min-h-[160px] w-auto object-contain drop-shadow-md z-25 animate-floaty opacity-80 sm:opacity-100 pointer-events-none"
       />
 
-      {/* 5. Ratita Flat con Globo (rata_mouse.png) por ENCIMA del borde inferior (z-30) */}
+      {/* 4. Ratita Flat con Globo (rata_mouse.png) por ENCIMA del borde inferior (z-30) */}
       <img
         src="/assets/rata_mouse.png"
         alt="Flat Mouse Balloon"
         className="absolute left-[2%] sm:left-[4%] bottom-[2%] sm:bottom-[3%] h-[14vh] sm:h-[19vh] max-h-[180px] min-h-[70px] w-auto object-contain drop-shadow-md z-30 pointer-events-none"
       />
 
-      {/* 6. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png) - Adaptable en móviles */}
+      {/* 5. Elementos Derecha: Atril, Cesta Picnic, Árbol y Cojín Corazón (derecha_items.png) - Adaptable en móviles */}
       <img
         src="/assets/derecha_items.png"
         alt="Elementos Derecha Charo Fest"
         className="absolute right-[0.5%] bottom-[5%] sm:bottom-[7%] h-[42vh] sm:h-[68vh] max-h-[600px] min-h-[180px] w-auto object-contain drop-shadow-md hover:scale-102 transition-transform z-25 opacity-80 sm:opacity-100 pointer-events-none"
       />
 
-      {/* 7. Título Gráfico Central (titulo.png) MÁS GRANDE */}
+      {/* 6. Título Gráfico Central (titulo.png) MÁS GRANDE */}
       <img
         src="/assets/titulo.png"
         alt="Título Charo Fest"
         className="absolute left-1/2 -translate-x-1/2 top-[11%] sm:top-[11%] h-[34vh] sm:h-[44vh] max-h-[440px] min-h-[170px] w-auto object-contain z-25 drop-shadow-sm"
       />
 
-      {/* 8. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN MÁS GRANDE Y PROMINENTE SIN SUPERPOSICIÓN */}
+      {/* 7. BLOQUE CENTRAL DE TEXTOS, FECHA Y BOTÓN MÁS GRANDE Y PROMINENTE SIN SUPERPOSICIÓN */}
       <div className="absolute left-1/2 -translate-x-1/2 top-[50%] sm:top-[54%] w-[94%] max-w-[720px] text-center flex flex-col items-center gap-2.5 sm:gap-4 z-30 pointer-events-auto px-2">
         
         {/* Subtítulo descriptivo de 3 líneas MÁS GRANDE */}
@@ -84,7 +77,7 @@ export default function Hero({ onOpenCalendar, onOpenWishlist, onOpenGallery }) 
 
       </div>
 
-      {/* 9. Hotspots Transparentes adicionales */}
+      {/* 8. Hotspots Transparentes adicionales */}
       <div 
         onClick={onOpenCalendar}
         className="absolute right-[5%] w-[14%] top-[30%] h-[22%] cursor-pointer hover:scale-102 transition-transform z-40"
