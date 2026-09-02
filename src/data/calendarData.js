@@ -369,6 +369,83 @@ export const INITIAL_WISHLIST = [
     reserved: false,
     image: "/assets/biblia_ntv_rosa.jpg",
     link: "https://vidalibros.com.pe/products/biblia-ntv-valor-premium-letra-grande-con-filament-simil-piel-rosa?variant=51672820515136"
+  },
+  {
+    id: "w8",
+    title: "Stride Sport Bra",
+    category: "Ropa Deportiva",
+    price: "Burn It Activewear",
+    note: "Burn It Activewear - Top deportivo Stride bra confortable en rosa/mauve.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/stride_sport_bra.jpg",
+    link: "https://burnitactivewear.com/products/stride-sport-bra?variant=42197045477489"
+  },
+  {
+    id: "w9",
+    title: "Crosscore Shorts",
+    category: "Ropa Deportiva",
+    price: "Burn It Activewear",
+    note: "Burn It Activewear - Shorts deportivos Crosscore de tiro alto.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/crosscore_shorts.jpg",
+    link: "https://burnitactivewear.com/products/crosscore-shorts?variant=42197066055793"
+  },
+  {
+    id: "w10",
+    title: "Ignite Leggings",
+    category: "Ropa Deportiva",
+    price: "Burn It Activewear",
+    note: "Burn It Activewear - Leggings moldeadores Ignite confortables.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/ignite_leggings.jpg",
+    link: "https://burnitactivewear.com/products/ignite-leggings?variant=42680766431345"
+  },
+  {
+    id: "w11",
+    title: "Roller Facial Cuarzo Rosa",
+    category: "Cuidado Facial",
+    price: "Isadora",
+    note: "Isadora Perú - Rodillo masajeador facial de cuarzo rosa natural.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/roller_cuarzo_rosa.jpg",
+    link: "https://pe.isadoraonline.com/roller-cuarzo-rosa-45153001.html"
+  },
+  {
+    id: "w12",
+    title: "Mini Roller Facial Acero Inoxidable",
+    category: "Cuidado Facial",
+    price: "Isadora",
+    note: "Isadora Perú - Mini rodillo facial descongestionante de acero inoxidable.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/mini_roller_acero.jpg",
+    link: "https://pe.isadoraonline.com/mini-roller-facial-de-acero-inoxidable-51501601.html"
+  },
+  {
+    id: "w13",
+    title: "Set de Pezoneras Adhesivas",
+    category: "Accesorios & Lencería",
+    price: "Isadora",
+    note: "Isadora Perú - Set de pezoneras de silicona adhesivas reutilizables.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/pezoneras_adhesivas.jpg",
+    link: "https://pe.isadoraonline.com/set-de-pezoneras-adhesivas-45536702.html"
+  },
+  {
+    id: "w14",
+    title: "Esponja de Maquillaje Rosa",
+    category: "Maquillaje & Belleza",
+    price: "Isadora",
+    note: "Isadora Perú - Esponja de maquillaje súper suave para difuminar.",
+    status: "Deseado",
+    reserved: false,
+    image: "/assets/esponja_maquillaje.jpg",
+    link: "https://pe.isadoraonline.com/esponja-de-maquillje-45524902.html"
   }
 ];
 

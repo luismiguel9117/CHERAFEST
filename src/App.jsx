@@ -15,7 +15,7 @@ import { SEPTEMBER_ACTIVITIES, INITIAL_WISHLIST } from './data/calendarData';
 import { supabase } from './lib/supabase';
 
 const STORAGE_ACTS_KEY = 'charo_fest_activities_v2';
-const STORAGE_WISH_KEY = 'charo_fest_wishlist_v3';
+const STORAGE_WISH_KEY = 'charo_fest_wishlist_v4';
 const STORAGE_GALLERY_KEY = 'charo_fest_gallery_v3';
 
 const PLACEHOLDER_IMG = '/assets/derecha_items.png';
